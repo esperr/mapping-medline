@@ -1,0 +1,671 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title>Mapping MEDLINE</title>
+  <link href="custom.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script>
+
+  </script>
+</head>
+
+<!--
+Designed and built by Ed Sperr (esperr@uga.edu or ed_sperr@hotmail.com)
+-->
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="countriesbaseline.js"></script>
+<script type="text/javascript" src="deciround.js"></script>
+
+<div class="container">
+
+<div id="topbanner" class="jumbotron">
+  <h1>Mapping MEDLINE</h1>
+  <a id="about" class="label label-default" href="about.html">About Mapping MEDLINE</a>
+</div>
+
+<div class="row">
+
+
+
+<div id="left" class="col-sm-12 col-md-10 col-lg-9">
+
+<div id="search" class="input-group input-group-lg">
+  <input type="text" id="pmsearch" class="form-control">
+  <span class="input-group-btn">
+    <button id="runsearch" class="btn btn-default" type="button">Search</button>
+  </span>
+
+</div>
+
+<div id="printable">
+  <div id="printable-stuff">
+  <span class="close">×</span>
+  <!--<canvas id="myCanvas2" width="900" height="550" >
+    Your browser does not support the HTML5 canvas tag.</canvas>-->
+  </div>
+</div>
+
+<div id="results">
+<div id="chart_div">
+  <div id="splash">
+    <p>Enter your MEDLINE search above, and Mapping MEDLINE will plot it against a map<em><a href="about.html">(more)</a></em></p>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="col-sm-12 col-md-2 col-lg-3">
+
+<div id="past" class="panel panel-default hideme">
+  <div class="panel-heading">
+    <h3 class="panel-title">Past searches</h3>
+  </div>
+  <div class="panel-body">
+    <dl></dl>
+  </div>
+</div>
+
+</div>
+
+
+</div>
+</div>
+
+
+<footer class="footer">
+  <div class="container">
+    <span class="text-muted">  <p>Design and contruction by Ed Sperr, M.L.I.S. (<a href="mailto:ed_sperr@hotmail.com">ed_sperr@hotmail.com</a>)   |
+      Data from <a href="http://www.ncbi.nlm.nih.gov/">NCBI</a>  |   Charting tools from  <a href="https://developers.google.com/chart/interactive/docs/gallery/barchart" target="_blank">Google</a>
+     | See the code at <a href="https://github.com/esperr/mesh-subhead-graph">GitHub</a></p></span>
+  </div>
+</footer>
+
+
+<script>
+
+(function() {
+
+//var searches = [];
+var search = [];
+var myMapsApiKey = 'AIzaSyCCGYq_RRoqyKK6PBQ1PUHqKA3VitSdvOI';
+google.charts.load('upcoming', {mapsApiKey: myMapsApiKey,'packages':['geochart']});
+
+var countOptions =  {
+                     tooltip: {isHtml: true} };
+
+var compOptions = {
+
+                  tooltip: {isHtml: true},
+                   colorAxis: {colors: ['#D3FDEC', '#FDFBB7', '#FFCA8B', '#FF7761', '#EC4D94']}
+                  };
+
+var options = {
+                     tooltip: {isHtml: true}
+              };
+
+var currentwidth = $("#left").innerWidth() * .9;
+var mywidth = 600;
+var myheight = 400;
+if (currentwidth > mywidth) {
+  mywidth = currentwidth;
+  myheight = currentwidth*.666;
+}
+
+var regions = { regions: ["region": ]
+
+}
+var Regions = ["Africa", "Americas", "Asia", "Europe"];
+
+var Africa =   ["Cameroon", "Central African Republic", "Chad", "Congo", "Democratic Republic of the Congo", "Equatorial Guinea", "Gabon", "Burundi", "Djibouti", "Eritrea", "Ethiopia", "Kenya",
+  "Rwanda", "Somalia", "South Sudan", "Sudan", "Tanzania", "Uganda", "Angola", "Botswana", "Lesotho", "Malawi", "Mozambique", "Namibia", "South Africa", "Swaziland", "Zambia", "Zimbabwe", "Benin",
+  "Burkina Faso", "Cape Verde", "Cote d'Ivoire", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Liberia", "Mali", "Mauritania", "Niger", "Nigeria",
+  "Senegal", "Sierra Leone", "Togo", "Algeria", "Egypt", "Libya", "Morocco", "Tunisia"];
+
+var Americas = ["Antigua and Barbuda", "Bahamas", "Barbados", "British Virgin Islands", "Cuba", "Dominica", "Dominican Republic", "Grenada", "Guadeloupe", "Haiti", "Jamaica", "Martinique",
+"Netherlands Antilles", "Puerto Rico", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Trinidad and Tobago", "United States Virgin Islands",
+"Belize", "Costa Rica", "El Salvador", "Guatemala", "Honduras", "Nicaragua", "Panama", "Canada", "Greenland", "Mexico", "United States", "Argentina", "Bolivia", "Brazil",
+"Chile", "Colombia", "Ecuador", "French Guiana", "Guyana", "Paraguay", "Peru", "Suriname", "Uruguay", "Venezuela"];
+
+var Asia = ["Kazakhstan", "Kyrgyzstan", "Tajikistan", "Turkmenistan", "Uzbekistan", "Russia", "Borneo", "Brunei", "Cambodia", "Indonesia", "Laos", "Malaysia", "Mekong Valley", "Myanmar", "Philippines",
+"Singapore", "Thailand", "Timor-Leste", "Vietnam", "Bangladesh", "Bhutan", "India", "Afghanistan", "Bahrain", "Iran", "Iraq", "Israel", "Jordan", "Kuwait", "Lebanon", "Oman", "Qatar", "Saudi Arabia",
+"Syria", "Turkey", "United Arab Emirates", "Yemen", "Nepal", "Pakistan", "Sri Lanka", "China", "Hong Kong", "Macau", "Tibet", "Japan", "Democratic People's Republic of Korea", "Republic of Korea",
+"Mongolia", "Taiwan"];
+
+var Europe = [  "Andorra", "Austria", "Belgium", "Albania", "Estonia", "Latvia", "Lithuania", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Czech Republic", "Hungary", "Kosovo", "Macedonia (Republic)",
+"Moldova", "Montenegro", "Poland", "Republic of Belarus", "Romania", "Serbia", "Slovakia", "Slovenia", "Ukraine", "France",
+  "Germany", "Gibraltar", "Great Britain", "Channel Islands", "Guernsey", "England ", "Northern Ireland", "Scotland", "Wales",
+  "Greece", "Ireland", "Italy", "Liechtenstein", "Luxembourg", "Mediterranean Region", "Cyprus", "Malta", "Sicily", "Monaco", "Netherlands", "Portugal", "San Marino", "Denmark",
+  "Greenland", "Finland", "Iceland", "Norway", "Sweden", "Spain", "Switzerland", "Armenia", "Azerbaijan", "Georgia (Republic)", "Vatican City"];
+
+
+//term = " ";
+//dosearch(term);
+function handlesearch() {
+  term = $("#pmsearch").val();
+  dosearch(term);
+  $("#pmsearch").val("");
+  document.getElementById('pmsearch').focus();
+  }
+
+function showWait() {
+  $( "#pmsearch" ).prop( "disabled", true );
+  $( "#runsearch" ).prop( "disabled", true );
+  $( "form" ).addClass( "hideme" );
+  $("#search").after('<div id="loading"><progress id="fetchresults" value=".1" max="1"></progress></div>');
+  if (searches.length > 0) {
+      $("#loading").append('<p>Searching -- please wait....</p>');
+    } else {
+      $( "#loading" ).append( '<div id="loading">Loading baseline...</span>' );
+    }
+  }
+
+  function showDone() {
+    $( "#pmsearch" ).prop( "disabled", false );
+    $( "#runsearch" ).prop( "disabled", false );
+    $( "form" ).removeClass( "hideme" );
+    $( "#runsearch" ).removeClass( "hideme" );
+    $("#loading").remove();
+    $("#fetchresults").remove();
+    }
+
+  $( "#results" ).on( "click", ".regionsearch", function() {
+      var region = $(this).data("region");
+      var searchIndex = $(this).data("searchIndex");
+      var regionName = "";
+      if (region == 0) { regionName = "Africa"; }
+      if (region == 1) { regionName = "Americas"; }
+      if (region == 2) { regionName = "Asia"; }
+      if (region == 3) { regionName = "Europe"; }
+      if (searches[searchIndex].regions[region].countries.length < 1) {
+        getCatCounts(searches[searchIndex].term, regionName, searchIndex);
+      } else {
+        displayCounts(regionName, searchIndex);
+      }
+      });
+
+$( "#past" ).on( "click", ".pastsearch", function() {
+  var searchIndex = $(this).data("searchIndex");
+  displayCounts("Regions", searchIndex);
+  });
+
+  $( "#results" ).on( "click", ".displayregions", function() {
+    var searchIndex = searches.length - 1;
+    displayCounts("Regions", searchIndex);
+    });
+
+$( "#past" ).on( "click", "#showcompare", function() {
+    $( "#past" ).empty();
+    $( "#past" ).append("<p>Choose any two searches to compare</p>");
+    $( "#past" ).append("<dl>");
+    for (var i = 1; i < searches.length; i++) {
+      $( "#past dl" ).append('<dt><input type="checkbox" name="term" id="' + i + '" value="' + i + '"> <label for="' + i + '">' + searches[i].term + '</label></dt>');
+    }
+    $( "#past dl" ).append("<select id='compareregion'>");
+    for (var i = 0; i < Regions.length; i++) {
+      $( "#past select" ).append('<option value="' + Regions[i] + '">' + Regions[i] + '</option>');
+    }
+        $("#past dl").after('<input id="compare" type="button" value="Compare" /><p style="margin-top: 1em;"><a href="#!" class="showsearches">(go back to search list)</a></p>')
+    });
+
+$( "#past" ).on( "click", "#compare", function() {
+    var searchone = $("input[name='term']:checked").first().val();
+    var searchtwo = $("input[name='term']:checked").last().val();
+    var compareregion = $( "#past option:selected" ).text();
+    console.log(compareregion);
+    compareTerms(searchone, searchtwo, compareregion);
+    });
+
+$( "#past" ).on( "click", ".showsearches", function() {
+    showSearches();
+    });
+
+$( "#results" ).on( "click", ".printMe", function() {
+    getprint();
+    });
+
+$( "#results" ).on( "click", "#showcounts", function() {
+    var charttype = 'counts';
+    var searchIndex = $(this).attr("name");
+    var region = $(this).data("region");
+    drawMap (region, searchIndex, "counts");
+   });
+
+$( "#results" ).on( "click", "#showprops", function() {
+   var charttype = 'counts';
+   var searchIndex = $(this).attr("name");
+   var region = $(this).data("region");
+   drawMap (region, searchIndex, "proportional");
+  });
+
+function showSearches() {
+  $( "#past" ).empty();
+  $( "#past" ).removeClass( "hideme" );
+  $( "#past" ).append("<div class='panel-heading'>");
+  $( "#past div" ).append("<h3 class='panel-title'>Searches</h3>");
+  $( "#past" ).append("<dl>");
+  for (var i = 1; i < searches.length; i++) {
+    $("#past dl").append('<dt class="pastsearch"><a href="#!">' + searches[i].term + "</a></dt>");
+    $("#past dt").last().data("searchIndex", i);
+    }
+    if (searches.length > 2) {
+      $("#past dl").after('<input id="showcompare" type="button" value="Compare searches" />')
+    }
+ }
+
+
+ //Printable modal stuff
+ //$( "#left" ).on( "click", ".printMe", function() {
+//     $("#printable").css("display", "block");
+  //   });
+
+ //they can only select two terms to compare....
+ $( "#past" ).on( "change", "input[name='term']:checked", function() {
+   var cnt = $("input[name='term']:checked").length;
+   if (cnt > 2) {
+     $("input[name='term']:checked").first().prop( "checked", false );
+   }
+ });
+
+ //If something goes wrong, we start over
+function startOver() {
+   $("#loading").remove();
+   console.log("Something bad happened when we called the API...");
+   searches.pop();
+   handlesearch();
+   }
+
+function dosearch(term) {
+     //while (catCounts.length) { catCounts.pop(); }
+     var searchstr = term;
+     psearch(searchstr, function( data ) {
+       // e.g. filter the response
+       if (!data.esearchresult.count) {
+         //if there's no count  we have to start over
+         startOver();
+         return;
+       }
+       if (data.esearchresult.count == "0") {
+         $("#chart_div").prepend('<div class="alert alert-danger" role="alert">Nothing found for this search. Please try again</div>');
+         showDone();
+         return;
+       } else {
+       search = {
+         'term': term,
+         'count': data.esearchresult.count,
+         'regions': []
+       };
+       searches.push(search);
+       var searchIndex = searches.length - 1;
+       getCatCounts(term, "Regions", searchIndex);
+       }
+     });
+   }
+
+$("#runsearch").click(function(){
+    handlesearch();
+  });
+
+ $(document).keypress(function(e) {
+  if(e.which == 13) {
+      //Because both IE and FF now "helpfully" ignore the spec and treat 'button' the same as 'submit'
+      e.preventDefault();
+      handlesearch();
+  }
+});
+
+
+
+function getCatCounts(term, regionName, searchIndex) {
+  showWait();
+  if (regionName == "Regions") { var geo = Regions; }
+  if (regionName == "Africa") { var geo = Africa; }
+  if (regionName == "Asia") { var geo = Asia; }
+  if (regionName == "Americas") { var geo = Americas; }
+  if (regionName == "Europe") { var geo = Europe; }
+  var mySearch = searches[searchIndex];
+
+  var geoClone = geo.slice(0);
+  var areaCounts = [];
+  fetchCounts(term);
+
+  function fetchCounts(term) {
+    var area = geoClone.pop();
+    var searchstr = term + ' AND ("' + area + '"[mesh] OR ' + area + '[tiab])';
+    psearch(searchstr, function(data) {
+      if (data.esearchresult.translationstack) {
+        count = data.esearchresult.count;
+        total = mySearch.count;
+        proportion = count / total;
+        if (regionName == "Regions") {
+          regionCount = {
+            'region': area,
+            'count': count,
+            'proportion': proportion,
+            'countries': []
+          };
+          areaCounts.push(regionCount);
+        } else {
+          mycountryCount = new setcountryCount(area,data.esearchresult.count,proportion);
+          areaCounts.push(mycountryCount);
+        }
+
+        if (areaCounts.length == geo.length) {
+          if (regionName == "Regions") {
+            keysrt(areaCounts, 'region');
+            mySearch.regions = areaCounts.slice(0);
+            showDone();
+           }
+          if (regionName == "Africa") {
+            keysrt(areaCounts, 'country');
+            mySearch.regions[0].countries = areaCounts.slice(0);
+          }
+          if (regionName == "Americas") {
+            keysrt(areaCounts, 'country');
+            mySearch.regions[1].countries = areaCounts.slice(0);
+          }
+          if (regionName == "Asia") {
+            keysrt(areaCounts, 'country');
+            mySearch.regions[2].countries = areaCounts.slice(0);
+          }
+          if (regionName == "Europe") {
+            keysrt(areaCounts, 'country');
+            mySearch.regions[3].countries = areaCounts.slice(0);
+          }
+          displayCounts(regionName, searchIndex);
+        }
+        $("progress").attr("value", areaCounts.length/geo.length);
+      } else {
+          startOver();
+          return;
+        }
+      });
+
+	    if (geoClone.length) {
+        //We do it this way instead of a loop so we can easily throttle the count requests with setTimeout
+        setTimeout(function(){
+          fetchCounts(term);
+        }, 150);
+	     } else {
+		     return;
+		    }
+    }
+}
+
+ function setcountryCount(country, sresults, proportion) {
+    this.country = country;
+    this.count = Number(sresults);
+    this.proportion = proportion;
+}
+
+function psearch(searchstr, callback) {
+  $.ajax({
+	url: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi',
+  error: function () {
+    startOver();
+    //alert("Oops, something went wrong. Please try again!")
+    return;
+  },
+	data: {
+	db: 'pubmed',
+	usehistory: 'y',
+	term: searchstr,
+	retmode: 'json',
+	retmax: 0,
+	email: 'ed_sperr@hotmail.com',
+	tool: 'medmap'
+  },
+  success: callback
+     });
+}
+
+
+function displayCounts(regionName, searchIndex) {
+  if (regionName == "Regions") {
+    $("#results").empty();
+    $.each( searches[searchIndex].regions, function( i, regionitem ) {
+      //$("#chart_div").append('<div>' + regionitem.region + ' -- ' + regionitem.count + '</div>');
+      $("#results").append('<div class="regionsearch"><a href="#!">' + regionitem.region + "</a></div>");
+      $("#results div").last().data("region", i);
+      $("#results div").last().data("searchIndex", searchIndex);
+    });
+  } else {
+    drawMap(regionName, searchIndex, "counts");
+  }
+  showSearches();
+  //console.log(JSON.stringify(searches[searchIndex]));
+}
+
+function compareTerms(searchone, searchtwo) {
+  return;
+  $( "#results" ).empty();
+  $( "#results" ).append( '<div id="chart_div">' );
+  var termCompArray =  [['Country', 'Term Comparison', 'Tooltip']];
+  var termOne = searches[searchone].stateCounts;
+  var termTwo = searches[searchtwo].stateCounts;
+  $.each( termOne, function( i, stateitem ) {
+    //make our first proportion negative, then add them together to find the midpoint
+    oneprop = stateitem.proportion - (stateitem.proportion*2);
+    comparison = oneprop + termTwo[i].proportion;
+    tipText = "<span style='color:red; font-weight: bold;'>" + searches[searchone].term + "</span> represents " + Math.round10((stateitem.proportion*100), -2) + "% of US total</br>" +
+              "<span style='color:blue; font-weight: bold;'>" + searches[searchtwo].term + "</span>  represents " + Math.round10((termTwo[i].proportion*100), -2) + "% of US total";
+    termCompArray.push([stateitem.state, comparison, tipText]);
+    });
+  $("#chart_div").before("<h3>Proportion of <span style='color:red'>'" + searches[searchone].term + "'</span> vs <span style='color:blue'>'" + searches[searchtwo].term + "'</span> in newspapers</h3>")
+  var data = google.visualization.arrayToDataTable(termCompArray);
+  data.setColumnProperty(2, 'role', 'tooltip');
+  data.setColumnProperty(2, 'html', true);
+  var options = {
+                     resolution: 'provinces',
+                     region: 'US',
+                     tooltip: {isHtml: true},
+                     colorAxis: {colors: ['red', 'blue']}
+                    };
+
+  if ($("#startyear").val() != "1836" || $("#endyear").val() != "1922" ) {
+      $("#results h3").append(' (' + $("#startyear").val() + ' to ' + $("#endyear").val() + ')');
+    }
+  var chart = new google.visualization.GeoChart( document.getElementById('chart_div') );
+  google.visualization.events.addListener(chart, 'ready', function () {
+    dataURL = chart.getImageURI();
+    getprint(dataURL,"compare");
+  });
+  chart.draw(data, options);
+}
+
+function drawMap(regionName, searchIndex, charttype) {
+  $("#results").empty();
+  console.log(regionName + " " + searchIndex + " " + charttype);
+    if (regionName == "Africa") {
+      var regindex = 0;
+      options.region = '002';
+     }
+    if (regionName == "Americas") {
+      var regindex = 1;
+      options.region = '013';
+     }
+    if (regionName == "Asia") {
+      var regindex = 2;
+      options.region = '142';
+     }
+    if (regionName == "Europe") {
+      var regindex = 3;
+      options.region = '150';
+     }
+    var countryCompArray =  [['Country', 'Comparison', 'Tooltip']];
+    var countryCountArray =  [['Country', 'Results', 'Tooltip']];
+    showDone();
+    $( "#results" ).append( '<div id="chart_div">' );
+    var mySearch = searches[searchIndex];
+    var countries = mySearch.regions[regindex].countries;
+    var basecountries = searches[0].regions[regindex].countries;
+    if (charttype == "proportional") {
+      $("#chart_div").before("<h3>Proportion of MEDLINE citations for '" + mySearch.term + "' in " + regionName + "</h3>")
+      $.each( countries, function( i, countryitem ) {
+           comparison = countryitem.proportion - basecountries[i].proportion;
+           tipText = "<strong>" + Math.round10((countryitem.proportion*100), -2) + "%</strong> of search total</br>" + "(" + countryitem.country + " represents " + Math.round10((basecountries[i].proportion*100), -2) + "% of all MEDLINE results)";
+           countryCompArray.push([countryitem.country, comparison, tipText]);
+           });
+      var data = google.visualization.arrayToDataTable(countryCompArray);
+      data.setColumnProperty(2, 'role', 'tooltip');
+      data.setColumnProperty(2, 'html', true);
+      options.colorAxis = {colors: ['#D3FDEC', '#FDFBB7', '#FFCA8B', '#FF7761', '#EC4D94']};
+      options.legend = {textStyle: {color: 'blue', fontSize: 16}};
+      //var options = compOptions;
+      $("#chart_div").after('<input id="showcounts" class="toggleview" type="button" name="' + searchIndex + '"value="Show raw counts" />')
+      $("#showcounts").data("region", regionName);
+    } else {
+      $("#chart_div").before("<h3>Count of MEDLINE citations for '" + mySearch.term + "' in " + regionName + "</h3>")
+      $.each( countries, function( i, countryitem ) {
+        tipText = "<strong>" + countryitem.count.toLocaleString() + "</strong> results <br/>(out of " + basecountries[i].count.toLocaleString() + " for the country)";
+           countryCountArray.push([countryitem.country, countryitem.count, tipText]);
+           });
+      var data = google.visualization.arrayToDataTable(countryCountArray);
+      data.setColumnProperty(2, 'role', 'tooltip');
+      data.setColumnProperty(2, 'html', true);
+      options.colorAxis = {minValue: 0,  colors: ['#EEE6DB', '#109618']};
+      //var options = countOptions;
+      $("#chart_div").after('<input id="showprops" class="toggleview" type="button" name="' + searchIndex + '" value="Show proportions" />')
+      $("#showprops").data("region", regionName);
+    }
+    $("#chart_div").after('<a href="#!" class="printMe">Printable version</a></dt>');
+    var chart = new google.visualization.GeoChart( document.getElementById('chart_div') );
+    $("#results").prepend('<p class="displayregions"><a href="#!">Back to region list</a></p>');
+
+    //Here comes the clicky bit...
+    function selectHandler() {
+    var selectedItem = chart.getSelection()[0];
+    if (selectedItem) {
+      var selectstate = data.getValue(selectedItem.row, 0);
+      var resultsURL = 'https://www.ncbi.nlm.nih.gov/pubmed/';
+      resultsURL = resultsURL + '?term=' + mySearch.term + '+AND+(' + selectstate + '[mesh]+OR+' + selectstate + '[tiab])';
+       window.open(resultsURL,'_blank');
+    }
+  }
+
+    google.visualization.events.addListener(chart, 'select', selectHandler);
+    google.visualization.events.addListener(chart, 'ready', function () {
+      dataURL = chart.getImageURI();
+    });
+    chart.draw(data, options);
+  }
+
+  function getprint(type) {
+    $( "#printable img" ).remove();
+    $( "#hiddendiv" ).remove();
+    var c2 = document.createElement("canvas");
+    c2.width = 900;
+    c2.height = 550;
+    //var c2 = document.getElementById("myCanvas2");
+    var ctx2 = c2.getContext("2d");
+    ctx2.clearRect(0, 0, c2.width, c2.height);
+    var background = new Image();
+    background.src = dataURL;
+
+    background.onload = function(){
+          ctx2.beginPath();
+          ctx2.rect(0, 0, 900, 550);
+          ctx2.fillStyle = "white";
+          ctx2.fill();
+          ctx2.drawImage(background,5,40,825,500);
+          var titletext = $( "#results h3" ).text();
+          ctx2.font="25px Century Gothic, Helvetica, sans-serif";
+          ctx2.fillStyle = "black";
+          if (titletext.length > 80) {
+            //titletext = titletext.slice(0, 80) + "...";
+            var multiline = 1;
+          }
+          if (type == "compare") {
+            //yes, we have to specially draw our reds and our blues...
+            var titleparts = titletext.split("'");
+            ctx2.fillText(titleparts[0],35,50);
+            var offset = 40 + ctx2.measureText(titleparts[0]).width;
+            ctx2.fillStyle = "red";
+            ctx2.fillText("'" + titleparts[1] + "'",offset,50);
+            offset = offset + ctx2.measureText(titleparts[1]).width + 12;
+            ctx2.fillStyle = "black";
+            if (!multiline) {
+              ctx2.fillText(titleparts[2],offset,50);
+              offset = offset + ctx2.measureText(titleparts[2]).width;
+              ctx2.fillStyle = "blue";
+              ctx2.fillText("'" + titleparts[3] + "'",offset,50);
+              offset = offset + ctx2.measureText(titleparts[3]).width + 12;
+              ctx2.fillStyle = "black";
+              ctx2.fillText(titleparts[4],offset,50);
+            } else {
+              ctx2.fillText(titleparts[2],35,77);
+              var twooffset = 40 + ctx2.measureText(titleparts[2]).width;
+              ctx2.fillStyle = "blue";
+              ctx2.fillText("'" + titleparts[3] + "'",twooffset,77);
+              twooffset = twooffset + ctx2.measureText(titleparts[3]).width + 12;
+              ctx2.fillStyle = "black";
+              ctx2.fillText(titleparts[4],twooffset,77);
+            }
+          } else {
+            if (!multiline) {
+              ctx2.fillText(titletext,35,30);
+            } else {
+              titletext = titletext.split(" ");
+              var titlepart1 = titletext.slice(0, 12).join(" ");
+              ctx2.fillText(titlepart1,35,50);
+              var titlepart2 = titletext.slice(12).join(" ");
+              ctx2.fillText(titlepart2,35,77);
+            }
+          }
+          var newdataURL = c2.toDataURL();
+          $( "#printable-stuff" ).append('<img src="' + newdataURL + '">');
+          $("#printable").css("display", "block");
+      //alert("loaded");
+    }
+
+
+
+      function appendText(text, color, x, y, weight) {
+        var newText = document.createElementNS("http://www.w3.org/2000/svg","text");
+        newText.setAttributeNS(null,"font-size",".9em");
+        newText.setAttributeNS(null,"font-family","sans-serif");
+        newText.setAttributeNS(null,"x",x);
+        newText.setAttributeNS(null,"y",y);
+        newText.setAttributeNS(null,"fill",color);
+        newText.setAttributeNS(null,"font-weight",weight);
+        var textNode = document.createTextNode(text);
+        newText.appendChild(textNode);
+        printSvg.appendChild(newText);
+      }
+    }
+
+$(".close").click(function(){
+  $("#printable").css("display", "none");
+      });
+
+$(document).click(function(event) {
+   var closeit = document.getElementById('printable');
+   if (event.target == closeit) {
+      $("#printable").css("display", "none");
+      }
+      });
+
+function keysrt(arr, key, reverse) {
+    var sortOrder = 1;
+    if(reverse){
+        sortOrder = -1;
+    }
+    return arr.sort(function(a, b) {
+        var x = a[key],
+            y = b[key];
+
+        return sortOrder * ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
+
+})
+
+();
+
+
+
+
+</script>
+</body>
+</html>
