@@ -113,35 +113,53 @@ if (currentwidth > mywidth) {
   myheight = currentwidth*.666;
 }
 
-var regions = { regions: ["region": ]
-
-}
-var Regions = ["Africa", "Americas", "Asia", "Europe"];
-
-var Africa =   ["Cameroon", "Central African Republic", "Chad", "Congo", "Democratic Republic of the Congo", "Equatorial Guinea", "Gabon", "Burundi", "Djibouti", "Eritrea", "Ethiopia", "Kenya",
-  "Rwanda", "Somalia", "South Sudan", "Sudan", "Tanzania", "Uganda", "Angola", "Botswana", "Lesotho", "Malawi", "Mozambique", "Namibia", "South Africa", "Swaziland", "Zambia", "Zimbabwe", "Benin",
-  "Burkina Faso", "Cape Verde", "Cote d'Ivoire", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Liberia", "Mali", "Mauritania", "Niger", "Nigeria",
-  "Senegal", "Sierra Leone", "Togo", "Algeria", "Egypt", "Libya", "Morocco", "Tunisia"];
-
-var Americas = ["Antigua and Barbuda", "Bahamas", "Barbados", "British Virgin Islands", "Cuba", "Dominica", "Dominican Republic", "Grenada", "Guadeloupe", "Haiti", "Jamaica", "Martinique",
-"Netherlands Antilles", "Puerto Rico", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Trinidad and Tobago", "United States Virgin Islands",
-"Belize", "Costa Rica", "El Salvador", "Guatemala", "Honduras", "Nicaragua", "Panama", "Canada", "Greenland", "Mexico", "United States", "Argentina", "Bolivia", "Brazil",
-"Chile", "Colombia", "Ecuador", "French Guiana", "Guyana", "Paraguay", "Peru", "Suriname", "Uruguay", "Venezuela"];
-
-var Asia = ["Kazakhstan", "Kyrgyzstan", "Tajikistan", "Turkmenistan", "Uzbekistan", "Russia", "Borneo", "Brunei", "Cambodia", "Indonesia", "Laos", "Malaysia", "Mekong Valley", "Myanmar", "Philippines",
+var regions = { "regions":
+              [{"region": "Africa", "mapcode": "002", "countries":["Cameroon", "Central African Republic", "Chad", "Congo", "Democratic Republic of the Congo", "Equatorial Guinea", "Gabon", "Burundi", "Djibouti", "Eritrea", "Ethiopia", "Kenya",
+                "Rwanda", "Somalia", "South Sudan", "Sudan", "Tanzania", "Uganda", "Angola", "Botswana", "Lesotho", "Malawi", "Mozambique", "Namibia", "South Africa", "Swaziland", "Zambia", "Zimbabwe", "Benin",
+                "Burkina Faso", "Cape Verde", "Cote d'Ivoire", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Liberia", "Mali", "Mauritania", "Niger", "Nigeria",
+                "Senegal", "Sierra Leone", "Togo", "Algeria", "Egypt", "Libya", "Morocco", "Tunisia", "Comoros", "Madagascar", "Mauritius", "Reunion","Western Sahara"] },
+{"region": "Asia", "mapcode": "142", "countries":["Kazakhstan", "Kyrgyzstan", "Tajikistan", "Turkmenistan", "Uzbekistan", "Russia", "Borneo", "Brunei", "Cambodia", "Indonesia", "Laos", "Malaysia", "Mekong Valley", "Myanmar", "Philippines",
 "Singapore", "Thailand", "Timor-Leste", "Vietnam", "Bangladesh", "Bhutan", "India", "Afghanistan", "Bahrain", "Iran", "Iraq", "Israel", "Jordan", "Kuwait", "Lebanon", "Oman", "Qatar", "Saudi Arabia",
 "Syria", "Turkey", "United Arab Emirates", "Yemen", "Nepal", "Pakistan", "Sri Lanka", "China", "Hong Kong", "Macau", "Tibet", "Japan", "Democratic People's Republic of Korea", "Republic of Korea",
-"Mongolia", "Taiwan"];
-
-var Europe = [  "Andorra", "Austria", "Belgium", "Albania", "Estonia", "Latvia", "Lithuania", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Czech Republic", "Hungary", "Kosovo", "Macedonia (Republic)",
+"Mongolia", "Taiwan", "Armenia", "Azerbaijan", "Georgia (Republic)"] },
+{"region": "Caribbean", "mapcode": "029", "countries":["Antigua and Barbuda", "Bahamas", "Barbados", "British Virgin Islands", "Cuba", "Dominica", "Dominican Republic", "Grenada", "Guadeloupe", "Haiti", "Jamaica", "Martinique",
+"Netherlands Antilles", "Puerto Rico", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Trinidad and Tobago", "United States Virgin Islands", "Turks and Caicos", "Anguilla", "Cayman Islands"] },
+{"region": "Central America", "mapcode": "013", "countries":["Belize", "Costa Rica", "El Salvador", "Guatemala", "Honduras", "Mexico", "Nicaragua", "Panama"] },
+{"region": "Europe", "mapcode": "150", "countries":["Andorra", "Austria", "Belgium", "Albania", "Estonia", "Latvia", "Lithuania", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Czech Republic", "Hungary", "Kosovo", "Macedonia (Republic)",
 "Moldova", "Montenegro", "Poland", "Republic of Belarus", "Romania", "Serbia", "Slovakia", "Slovenia", "Ukraine", "France",
   "Germany", "Gibraltar", "Great Britain", "Channel Islands", "Guernsey", "England ", "Northern Ireland", "Scotland", "Wales",
-  "Greece", "Ireland", "Italy", "Liechtenstein", "Luxembourg", "Mediterranean Region", "Cyprus", "Malta", "Sicily", "Monaco", "Netherlands", "Portugal", "San Marino", "Denmark",
-  "Greenland", "Finland", "Iceland", "Norway", "Sweden", "Spain", "Switzerland", "Armenia", "Azerbaijan", "Georgia (Republic)", "Vatican City"];
+  "Greece", "Ireland", "Italy", "Liechtenstein", "Luxembourg", "Cyprus", "Malta", "Sicily", "Monaco", "Netherlands", "Portugal", "San Marino", "Denmark",
+  "Greenland", "Finland", "Iceland", "Norway", "Sweden", "Spain", "Switzerland", "Vatican City", "Faroe Islands", "Russia"] },
+{"region": "North America", "mapcode": "021", "countries":["Canada", "Greenland", "United States", "Bermuda"] },
+{"region": "Oceana", "mapcode": "009", "countries":["Australia", "Fiji", "New Caledonia", "Papua New Guinea", "Vanuatu", "Guam", "Palau", "New Zealand", "Hawaii", "Pitcairn Island", "American Samoa", "Independent State of Samoa", "Tonga", "Solomon Islands"] },
+{"region": "South America", "mapcode": "005", "countries":["Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Ecuador", "French Guiana", "Guyana", "Paraguay", "Peru", "Suriname", "Uruguay", "Venezuela"]}]
+};
 
+function searchStringer (area) {
+  if (area == "Macedonia (Republic)") { searchString = '"Macedonia (Republic)"[mesh]' }
+  else if (area == "Georgia (Republic)") { searchString = '"Georgia (Republic)"[mesh]' }
+  else if (area == "Anguilla") { searchString = 'Anguilla AND Caribbean' }
+  else if (area == "Turkey") { '"Turkey"[mesh] OR (Turkey[tiab] NOT (Avian OR Poultry))' }
+  else if (area == "Guinea ") { '"Guinea"[mesh] OR (Guinea[tiab] NOT guinea pig[tiab])' }
+  else {
+    searchString = '("' + area + '"[mesh] OR ' + area + '[tiab])';
+  }
+  return searchString;
+}
 
-//term = " ";
+function locationConvert (area) {
+    if (area == "Macedonia (Republic)") { locationString = 'MK' }
+    else if (area == "Georgia (Republic)") { locationString = 'GE' }
+    else if (area == "Democratic People's Republic of Korea") { locationString = 'KP' }
+    else if (area == "Republic of Korea") { locationString = 'KR' }
+    else { locationString = area }
+    return locationString;
+}
+//get baseline counts
+//term = "all[sb]";
 //dosearch(term);
+//alert("done!");
+
 function handlesearch() {
   term = $("#pmsearch").val();
   dosearch(term);
@@ -173,15 +191,15 @@ function showWait() {
   $( "#results" ).on( "click", ".regionsearch", function() {
       var region = $(this).data("region");
       var searchIndex = $(this).data("searchIndex");
-      var regionName = "";
-      if (region == 0) { regionName = "Africa"; }
-      if (region == 1) { regionName = "Americas"; }
-      if (region == 2) { regionName = "Asia"; }
-      if (region == 3) { regionName = "Europe"; }
+      //var regionName = "";
+      //if (region == 0) { regionName = "Africa"; }
+      //if (region == 1) { regionName = "Americas"; }
+      //if (region == 2) { regionName = "Asia"; }
+      //if (region == 3) { regionName = "Europe"; }
       if (searches[searchIndex].regions[region].countries.length < 1) {
-        getCatCounts(searches[searchIndex].term, regionName, searchIndex);
+        getCatCounts(searches[searchIndex].term, region, searchIndex);
       } else {
-        displayCounts(regionName, searchIndex);
+        displayCounts(region, searchIndex);
       }
       });
 
@@ -203,8 +221,8 @@ $( "#past" ).on( "click", "#showcompare", function() {
       $( "#past dl" ).append('<dt><input type="checkbox" name="term" id="' + i + '" value="' + i + '"> <label for="' + i + '">' + searches[i].term + '</label></dt>');
     }
     $( "#past dl" ).append("<select id='compareregion'>");
-    for (var i = 0; i < Regions.length; i++) {
-      $( "#past select" ).append('<option value="' + Regions[i] + '">' + Regions[i] + '</option>');
+    for (var i = 0; i < regions.regions.length; i++) {
+      $( "#past select" ).append('<option value="' + i + '">' + regions.regions[i].region + '</option>');
     }
         $("#past dl").after('<input id="compare" type="button" value="Compare" /><p style="margin-top: 1em;"><a href="#!" class="showsearches">(go back to search list)</a></p>')
     });
@@ -212,7 +230,7 @@ $( "#past" ).on( "click", "#showcompare", function() {
 $( "#past" ).on( "click", "#compare", function() {
     var searchone = $("input[name='term']:checked").first().val();
     var searchtwo = $("input[name='term']:checked").last().val();
-    var compareregion = $( "#past option:selected" ).text();
+    var compareregion = $( "#past option:selected" ).val();
     console.log(compareregion);
     compareTerms(searchone, searchtwo, compareregion);
     });
@@ -222,7 +240,7 @@ $( "#past" ).on( "click", ".showsearches", function() {
     });
 
 $( "#results" ).on( "click", ".printMe", function() {
-    getprint();
+    getprint($(this).data("type"));
     });
 
 $( "#results" ).on( "click", "#showcounts", function() {
@@ -317,13 +335,20 @@ $("#runsearch").click(function(){
 
 
 
-function getCatCounts(term, regionName, searchIndex) {
+function getCatCounts(term, regionIndex, searchIndex, compare) {
   showWait();
-  if (regionName == "Regions") { var geo = Regions; }
-  if (regionName == "Africa") { var geo = Africa; }
-  if (regionName == "Asia") { var geo = Asia; }
-  if (regionName == "Americas") { var geo = Americas; }
-  if (regionName == "Europe") { var geo = Europe; }
+  regionName = "";
+  var geo = [];
+  if (regionIndex == "Regions") {
+    $.each(regions.regions, function( index, region ) {
+        geo.push(region.region);
+      });
+    //console.log(geo);
+  } else {
+    $.each(regions.regions[regionIndex].countries, function( index, country ) {
+        geo.push(country);
+      });
+  }
   var mySearch = searches[searchIndex];
 
   var geoClone = geo.slice(0);
@@ -332,13 +357,14 @@ function getCatCounts(term, regionName, searchIndex) {
 
   function fetchCounts(term) {
     var area = geoClone.pop();
-    var searchstr = term + ' AND ("' + area + '"[mesh] OR ' + area + '[tiab])';
+    areapart = searchStringer(area);
+    var searchstr = term + ' AND ' + areapart;
     psearch(searchstr, function(data) {
       if (data.esearchresult.translationstack) {
         count = data.esearchresult.count;
         total = mySearch.count;
         proportion = count / total;
-        if (regionName == "Regions") {
+        if (regionIndex == "Regions") {
           regionCount = {
             'region': area,
             'count': count,
@@ -352,28 +378,16 @@ function getCatCounts(term, regionName, searchIndex) {
         }
 
         if (areaCounts.length == geo.length) {
-          if (regionName == "Regions") {
+          if (regionIndex == "Regions") {
             keysrt(areaCounts, 'region');
             mySearch.regions = areaCounts.slice(0);
             showDone();
-           }
-          if (regionName == "Africa") {
+          } else {
             keysrt(areaCounts, 'country');
-            mySearch.regions[0].countries = areaCounts.slice(0);
+            mySearch.regions[regionIndex].countries = areaCounts.slice(0);
+            console.log(JSON.stringify(areaCounts));
           }
-          if (regionName == "Americas") {
-            keysrt(areaCounts, 'country');
-            mySearch.regions[1].countries = areaCounts.slice(0);
-          }
-          if (regionName == "Asia") {
-            keysrt(areaCounts, 'country');
-            mySearch.regions[2].countries = areaCounts.slice(0);
-          }
-          if (regionName == "Europe") {
-            keysrt(areaCounts, 'country');
-            mySearch.regions[3].countries = areaCounts.slice(0);
-          }
-          displayCounts(regionName, searchIndex);
+          displayCounts(regionIndex, searchIndex);
         }
         $("progress").attr("value", areaCounts.length/geo.length);
       } else {
@@ -394,7 +408,7 @@ function getCatCounts(term, regionName, searchIndex) {
 }
 
  function setcountryCount(country, sresults, proportion) {
-    this.country = country;
+    this.country = locationConvert(country);
     this.count = Number(sresults);
     this.proportion = proportion;
 }
@@ -421,9 +435,11 @@ function psearch(searchstr, callback) {
 }
 
 
-function displayCounts(regionName, searchIndex) {
-  if (regionName == "Regions") {
+function displayCounts(regionIndex, searchIndex) {
+  if (regionIndex == "Regions") {
     $("#results").empty();
+    $("#results").append("<h3>")
+    $("#results h3").append(searches[searchIndex].count + ' results for ' + searches[searchIndex].term);
     $.each( searches[searchIndex].regions, function( i, regionitem ) {
       //$("#chart_div").append('<div>' + regionitem.region + ' -- ' + regionitem.count + '</div>');
       $("#results").append('<div class="regionsearch"><a href="#!">' + regionitem.region + "</a></div>");
@@ -431,68 +447,66 @@ function displayCounts(regionName, searchIndex) {
       $("#results div").last().data("searchIndex", searchIndex);
     });
   } else {
-    drawMap(regionName, searchIndex, "counts");
+    //$("#results").empty();
+    //$("#results").append(JSON.stringify(searches));
+    //$("#results").append("<br /><br /><br /><br /><br />")
+    //$("#results").prepend('<p class="displayregions"><a href="#!">Back to region list</a></p>');
+
+    showDone();
+    drawMap(regionIndex, searchIndex, "counts");
   }
   showSearches();
   //console.log(JSON.stringify(searches[searchIndex]));
 }
 
-function compareTerms(searchone, searchtwo) {
-  return;
+function compareTerms(searchone, searchtwo, compareregion) {
   $( "#results" ).empty();
   $( "#results" ).append( '<div id="chart_div">' );
   var termCompArray =  [['Country', 'Term Comparison', 'Tooltip']];
-  var termOne = searches[searchone].stateCounts;
-  var termTwo = searches[searchtwo].stateCounts;
-  $.each( termOne, function( i, stateitem ) {
+  var termOne = searches[searchone].regions[compareregion].countries;
+  if (termOne.length < 1) {
+    getCatCounts(searches[searchone].term, compareregion, searchone, "true");
+    alert("Need to find country counts for " + searches[searchone].term + " in " + regions.regions[compareregion].region);
+    return;
+  }
+  var termTwo = searches[searchtwo].regions[compareregion].countries;
+  if (termTwo.length < 1) {
+    getCatCounts(searches[searchtwo].term, compareregion, searchtwo, "true");
+    alert("Need to find country counts for " + searches[searchtwo].term + " in " + regions.regions[compareregion].region);
+    return;
+  }
+  $.each( termOne, function( i, country ) {
     //make our first proportion negative, then add them together to find the midpoint
-    oneprop = stateitem.proportion - (stateitem.proportion*2);
+    oneprop = country.proportion - (country.proportion*2);
     comparison = oneprop + termTwo[i].proportion;
-    tipText = "<span style='color:red; font-weight: bold;'>" + searches[searchone].term + "</span> represents " + Math.round10((stateitem.proportion*100), -2) + "% of US total</br>" +
-              "<span style='color:blue; font-weight: bold;'>" + searches[searchtwo].term + "</span>  represents " + Math.round10((termTwo[i].proportion*100), -2) + "% of US total";
-    termCompArray.push([stateitem.state, comparison, tipText]);
+    tipText = "<span style='color:red; font-weight: bold;'>" + searches[searchone].term + "</span> represents " + Math.round10((country.proportion*100), -4) + "% of total</br>" +
+              "<span style='color:blue; font-weight: bold;'>" + searches[searchtwo].term + "</span>  represents " + Math.round10((termTwo[i].proportion*100), -4) + "% of total";
+    termCompArray.push([country.country, comparison, tipText]);
     });
-  $("#chart_div").before("<h3>Proportion of <span style='color:red'>'" + searches[searchone].term + "'</span> vs <span style='color:blue'>'" + searches[searchtwo].term + "'</span> in newspapers</h3>")
+  $("#chart_div").before("<h3>Proportion of <span style='color:red'>'" + searches[searchone].term + "'</span> vs <span style='color:blue'>'" + searches[searchtwo].term + "'</span> in MEDLINE</h3>")
   var data = google.visualization.arrayToDataTable(termCompArray);
+  console.log(JSON.stringify(termCompArray) );
   data.setColumnProperty(2, 'role', 'tooltip');
   data.setColumnProperty(2, 'html', true);
   var options = {
-                     resolution: 'provinces',
-                     region: 'US',
                      tooltip: {isHtml: true},
                      colorAxis: {colors: ['red', 'blue']}
                     };
-
-  if ($("#startyear").val() != "1836" || $("#endyear").val() != "1922" ) {
-      $("#results h3").append(' (' + $("#startyear").val() + ' to ' + $("#endyear").val() + ')');
-    }
+  options.region = regions.regions[compareregion].mapcode;
+  $("#chart_div").after('<a href="#!" class="printMe">Printable version</a></dt>');
+  $(".printMe").data("type", "compare");
   var chart = new google.visualization.GeoChart( document.getElementById('chart_div') );
   google.visualization.events.addListener(chart, 'ready', function () {
     dataURL = chart.getImageURI();
-    getprint(dataURL,"compare");
   });
   chart.draw(data, options);
 }
 
-function drawMap(regionName, searchIndex, charttype) {
+function drawMap(regindex, searchIndex, charttype) {
   $("#results").empty();
   console.log(regionName + " " + searchIndex + " " + charttype);
-    if (regionName == "Africa") {
-      var regindex = 0;
-      options.region = '002';
-     }
-    if (regionName == "Americas") {
-      var regindex = 1;
-      options.region = '013';
-     }
-    if (regionName == "Asia") {
-      var regindex = 2;
-      options.region = '142';
-     }
-    if (regionName == "Europe") {
-      var regindex = 3;
-      options.region = '150';
-     }
+  options.region = regions.regions[regindex].mapcode;
+
     var countryCompArray =  [['Country', 'Comparison', 'Tooltip']];
     var countryCountArray =  [['Country', 'Results', 'Tooltip']];
     showDone();
@@ -501,10 +515,10 @@ function drawMap(regionName, searchIndex, charttype) {
     var countries = mySearch.regions[regindex].countries;
     var basecountries = searches[0].regions[regindex].countries;
     if (charttype == "proportional") {
-      $("#chart_div").before("<h3>Proportion of MEDLINE citations for '" + mySearch.term + "' in " + regionName + "</h3>")
+      $("#chart_div").before("<h3>Proportion of MEDLINE citations for '" + mySearch.term + "' in " + regions.regions[regindex].region + "</h3>")
       $.each( countries, function( i, countryitem ) {
            comparison = countryitem.proportion - basecountries[i].proportion;
-           tipText = "<strong>" + Math.round10((countryitem.proportion*100), -2) + "%</strong> of search total</br>" + "(" + countryitem.country + " represents " + Math.round10((basecountries[i].proportion*100), -2) + "% of all MEDLINE results)";
+           tipText = "<strong>" + Math.round10((countryitem.proportion*100), -4) + "%</strong> of search total</br>" + "(" + countryitem.country + " represents " + Math.round10((basecountries[i].proportion*100), -4) + "% of all MEDLINE results)";
            countryCompArray.push([countryitem.country, comparison, tipText]);
            });
       var data = google.visualization.arrayToDataTable(countryCompArray);
@@ -514,9 +528,9 @@ function drawMap(regionName, searchIndex, charttype) {
       options.legend = {textStyle: {color: 'blue', fontSize: 16}};
       //var options = compOptions;
       $("#chart_div").after('<input id="showcounts" class="toggleview" type="button" name="' + searchIndex + '"value="Show raw counts" />')
-      $("#showcounts").data("region", regionName);
+      $("#showcounts").data("region", regindex);
     } else {
-      $("#chart_div").before("<h3>Count of MEDLINE citations for '" + mySearch.term + "' in " + regionName + "</h3>")
+      $("#chart_div").before("<h3>Count of MEDLINE citations for '" + mySearch.term + "' in " + regions.regions[regindex].region + "</h3>")
       $.each( countries, function( i, countryitem ) {
         tipText = "<strong>" + countryitem.count.toLocaleString() + "</strong> results <br/>(out of " + basecountries[i].count.toLocaleString() + " for the country)";
            countryCountArray.push([countryitem.country, countryitem.count, tipText]);
@@ -527,7 +541,7 @@ function drawMap(regionName, searchIndex, charttype) {
       options.colorAxis = {minValue: 0,  colors: ['#EEE6DB', '#109618']};
       //var options = countOptions;
       $("#chart_div").after('<input id="showprops" class="toggleview" type="button" name="' + searchIndex + '" value="Show proportions" />')
-      $("#showprops").data("region", regionName);
+      $("#showprops").data("region", regindex);
     }
     $("#chart_div").after('<a href="#!" class="printMe">Printable version</a></dt>');
     var chart = new google.visualization.GeoChart( document.getElementById('chart_div') );
@@ -554,6 +568,7 @@ function drawMap(regionName, searchIndex, charttype) {
   function getprint(type) {
     $( "#printable img" ).remove();
     $( "#hiddendiv" ).remove();
+    console.log(type);
     var c2 = document.createElement("canvas");
     c2.width = 900;
     c2.height = 550;
