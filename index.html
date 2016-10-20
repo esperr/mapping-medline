@@ -123,7 +123,7 @@ var regions = { "regions":
 "Syria", "Turkey", "United Arab Emirates", "Yemen", "Nepal", "Pakistan", "Sri Lanka", "China", "Hong Kong", "Macau", "Tibet", "Japan", "Democratic People's Republic of Korea", "Republic of Korea",
 "Mongolia", "Taiwan", "Armenia", "Azerbaijan", "Georgia (Republic)"] },
 {"region": "Caribbean", "mapcode": "029", "countries":["Antigua and Barbuda", "Bahamas", "Barbados", "British Virgin Islands", "Cuba", "Dominica", "Dominican Republic", "Grenada", "Guadeloupe", "Haiti", "Jamaica", "Martinique",
-"Netherlands Antilles", "Puerto Rico", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Trinidad and Tobago", "United States Virgin Islands", "Turks and Caicos", "Anguilla", "Cayman Islands"] },
+"Netherlands Antilles", "Puerto Rico", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Trinidad and Tobago", "United States Virgin Islands", "Turks and Caicos", "Anguilla", "Cayman Islands", "Montserrat", "Saint Martin", "Sint Maarten" ] },
 {"region": "Central America", "mapcode": "013", "countries":["Belize", "Costa Rica", "El Salvador", "Guatemala", "Honduras", "Mexico", "Nicaragua", "Panama"] },
 {"region": "Europe", "mapcode": "150", "countries":["Andorra", "Austria", "Belgium", "Albania", "Estonia", "Latvia", "Lithuania", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Czech Republic", "Hungary", "Kosovo", "Macedonia (Republic)",
 "Moldova", "Montenegro", "Poland", "Republic of Belarus", "Romania", "Serbia", "Slovakia", "Slovenia", "Ukraine", "France",
@@ -132,15 +132,16 @@ var regions = { "regions":
   "Greenland", "Finland", "Iceland", "Norway", "Sweden", "Spain", "Switzerland", "Vatican City", "Faroe Islands", "Russia"] },
 {"region": "North America", "mapcode": "021", "countries":["Canada", "Greenland", "United States", "Bermuda"] },
 {"region": "Oceana", "mapcode": "009", "countries":["Australia", "Fiji", "New Caledonia", "Papua New Guinea", "Vanuatu", "Guam", "Palau", "New Zealand", "Hawaii", "Pitcairn Island", "American Samoa", "Independent State of Samoa", "Tonga", "Solomon Islands"] },
-{"region": "South America", "mapcode": "005", "countries":["Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Ecuador", "French Guiana", "Guyana", "Paraguay", "Peru", "Suriname", "Uruguay", "Venezuela"]}]
+{"region": "South America", "mapcode": "005", "countries":["Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Ecuador", "French Guiana", "Guyana", "Paraguay", "Peru", "Suriname", "Uruguay", "Venezuela", "Falkland Islands"]}]
 };
 
 function searchStringer (area) {
   if (area == "Macedonia (Republic)") { searchString = '"Macedonia (Republic)"[mesh]' }
   else if (area == "Georgia (Republic)") { searchString = '"Georgia (Republic)"[mesh]' }
   else if (area == "Anguilla") { searchString = 'Anguilla AND Caribbean' }
-  else if (area == "Turkey") { '"Turkey"[mesh] OR (Turkey[tiab] NOT (Avian OR Poultry))' }
-  else if (area == "Guinea ") { '"Guinea"[mesh] OR (Guinea[tiab] NOT guinea pig[tiab])' }
+  else if (area == "Turks and Caicos") { searchString = 'Turks and Caicos[tiab]' }
+  else if (area == "Turkey") { searchString = '("Turkey"[mesh] OR Turkey[tiab]) NOT (Avian OR Poultry)' }
+  else if (area == "Guinea") { searchString = '"Guinea"[mesh]' }
   else {
     searchString = '("' + area + '"[mesh] OR ' + area + '[tiab])';
   }
@@ -148,10 +149,11 @@ function searchStringer (area) {
 }
 
 function locationConvert (area) {
-    if (area == "Macedonia (Republic)") { locationString = 'MK' }
-    else if (area == "Georgia (Republic)") { locationString = 'GE' }
-    else if (area == "Democratic People's Republic of Korea") { locationString = 'KP' }
-    else if (area == "Republic of Korea") { locationString = 'KR' }
+    if (area == "Macedonia (Republic)") { locationString = 'Macedonia' }
+    else if (area == "Georgia (Republic)") { locationString = 'Georgia' }
+    else if (area == "Democratic People's Republic of Korea") { locationString = 'North Korea' }
+    else if (area == "Republic of Korea") { locationString = 'South Korea' }
+    else if (area == "Turks and Caicos") { locationString = 'Turks and Caicos Islands' }
     else { locationString = area }
     return locationString;
 }
@@ -525,13 +527,13 @@ function drawMap(regindex, searchIndex, charttype) {
       data.setColumnProperty(2, 'role', 'tooltip');
       data.setColumnProperty(2, 'html', true);
       options.colorAxis = {colors: ['#D3FDEC', '#FDFBB7', '#FFCA8B', '#FF7761', '#EC4D94']};
-      options.legend = {textStyle: {color: 'blue', fontSize: 16}};
       //var options = compOptions;
       $("#chart_div").after('<input id="showcounts" class="toggleview" type="button" name="' + searchIndex + '"value="Show raw counts" />')
       $("#showcounts").data("region", regindex);
     } else {
       $("#chart_div").before("<h3>Count of MEDLINE citations for '" + mySearch.term + "' in " + regions.regions[regindex].region + "</h3>")
       $.each( countries, function( i, countryitem ) {
+        var tipText = '';
         tipText = "<strong>" + countryitem.count.toLocaleString() + "</strong> results <br/>(out of " + basecountries[i].count.toLocaleString() + " for the country)";
            countryCountArray.push([countryitem.country, countryitem.count, tipText]);
            });
@@ -571,7 +573,7 @@ function drawMap(regindex, searchIndex, charttype) {
     console.log(type);
     var c2 = document.createElement("canvas");
     c2.width = 900;
-    c2.height = 550;
+    c2.height = 575;
     //var c2 = document.getElementById("myCanvas2");
     var ctx2 = c2.getContext("2d");
     ctx2.clearRect(0, 0, c2.width, c2.height);
@@ -580,10 +582,10 @@ function drawMap(regindex, searchIndex, charttype) {
 
     background.onload = function(){
           ctx2.beginPath();
-          ctx2.rect(0, 0, 900, 550);
+          ctx2.rect(0, 0, 900, 575);
           ctx2.fillStyle = "white";
           ctx2.fill();
-          ctx2.drawImage(background,5,40,825,500);
+          ctx2.drawImage(background,5,55,850,500);
           var titletext = $( "#results h3" ).text();
           ctx2.font="25px Century Gothic, Helvetica, sans-serif";
           ctx2.fillStyle = "black";
@@ -594,40 +596,40 @@ function drawMap(regindex, searchIndex, charttype) {
           if (type == "compare") {
             //yes, we have to specially draw our reds and our blues...
             var titleparts = titletext.split("'");
-            ctx2.fillText(titleparts[0],35,50);
-            var offset = 40 + ctx2.measureText(titleparts[0]).width;
+            ctx2.fillText(titleparts[0],20,30);
+            var offset = 25 + ctx2.measureText(titleparts[0]).width;
             ctx2.fillStyle = "red";
-            ctx2.fillText("'" + titleparts[1] + "'",offset,50);
-            offset = offset + ctx2.measureText(titleparts[1]).width + 12;
+            ctx2.fillText("'" + titleparts[1] + "'",offset,30);
+            offset = offset + ctx2.measureText(titleparts[1]).width + 8;
             ctx2.fillStyle = "black";
+            ctx2.fillText(titleparts[2],offset,30);
             if (!multiline) {
-              ctx2.fillText(titleparts[2],offset,50);
               offset = offset + ctx2.measureText(titleparts[2]).width;
               ctx2.fillStyle = "blue";
-              ctx2.fillText("'" + titleparts[3] + "'",offset,50);
+              ctx2.fillText("'" + titleparts[3] + "'",offset,30);
               offset = offset + ctx2.measureText(titleparts[3]).width + 12;
               ctx2.fillStyle = "black";
-              ctx2.fillText(titleparts[4],offset,50);
+              ctx2.fillText(titleparts[4],offset,30);
             } else {
-              ctx2.fillText(titleparts[2],35,77);
-              var twooffset = 40 + ctx2.measureText(titleparts[2]).width;
               ctx2.fillStyle = "blue";
-              ctx2.fillText("'" + titleparts[3] + "'",twooffset,77);
-              twooffset = twooffset + ctx2.measureText(titleparts[3]).width + 12;
+              ctx2.fillText("'" + titleparts[3] + "'",20,55);
+              var twooffset = 30 + ctx2.measureText(titleparts[3]).width;
               ctx2.fillStyle = "black";
-              ctx2.fillText(titleparts[4],twooffset,77);
+              ctx2.fillText(titleparts[4],twooffset,55);
             }
           } else {
             if (!multiline) {
-              ctx2.fillText(titletext,35,30);
+              ctx2.fillText(titletext,20,30);
             } else {
               titletext = titletext.split(" ");
-              var titlepart1 = titletext.slice(0, 12).join(" ");
-              ctx2.fillText(titlepart1,35,50);
-              var titlepart2 = titletext.slice(12).join(" ");
-              ctx2.fillText(titlepart2,35,77);
+              var titlepart1 = titletext.slice(0, 11).join(" ");
+              ctx2.fillText(titlepart1,20,50);
+              var titlepart2 = titletext.slice(11).join(" ");
+              ctx2.fillText(titlepart2,20,77);
             }
           }
+          ctx2.font = "15px sans-serif";
+          ctx2.fillText("Made with Mapping MEDLINE: http://esperr.github.io/mapping-medline",375,540);
           var newdataURL = c2.toDataURL();
           $( "#printable-stuff" ).append('<img src="' + newdataURL + '">');
           $("#printable").css("display", "block");
@@ -635,19 +637,6 @@ function drawMap(regindex, searchIndex, charttype) {
     }
 
 
-
-      function appendText(text, color, x, y, weight) {
-        var newText = document.createElementNS("http://www.w3.org/2000/svg","text");
-        newText.setAttributeNS(null,"font-size",".9em");
-        newText.setAttributeNS(null,"font-family","sans-serif");
-        newText.setAttributeNS(null,"x",x);
-        newText.setAttributeNS(null,"y",y);
-        newText.setAttributeNS(null,"fill",color);
-        newText.setAttributeNS(null,"font-weight",weight);
-        var textNode = document.createTextNode(text);
-        newText.appendChild(textNode);
-        printSvg.appendChild(newText);
-      }
     }
 
 $(".close").click(function(){
