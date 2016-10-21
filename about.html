@@ -22,56 +22,62 @@
 	<div class="panel panel-default">
 	<div class="panel-body">
 		<h2>Why Mapping MEDLINE?</h2>
-    <p>The biomedical sciences are a a worldwide endeavor, and <a href="http://www.ncbi.nlm.nih.gov/pubmed">PubMed</a> contains citations from researchers and clinicians investigating things around the globe. Mapping MEDLINE graphs that geographical diversity by taking
+    <p>The biomedical sciences are a global endeavor, and <a href="http://www.ncbi.nlm.nih.gov/pubmed">PubMed</a> contains citations from researchers and clinicians investigating things around the world. Mapping MEDLINE graphs that geographical diversity by taking
       the results of your PubMed search and displaying them by country.</p>
-    <h3>How it works</h3>
-    <p>Most citations in PubMed are from MEDLINE, and MEDLINE records are indexed with (typically around 10 to 12) <a href="https://www.nlm.nih.gov/mesh/2016/mesh_browser/index.html">Medical Subject Headings. These MeSH headings include not only topic areas but geographic
-      regions as well</a>. Mapping MEDLINE searches your results against these goegraphical headings. OF course some articles might mention a country name in a title or abstract <em>without</em> a corresponding index term, so Mapping MEDLINE searches those fields by country
-      name as well.
+    <h2>How it works</h2>
+    <p>Most citations in PubMed are from MEDLINE, and MEDLINE records are indexed with (typically around 10 to 12) <a href="https://www.nlm.nih.gov/mesh/2016/mesh_browser/index.html">Medical Subject Headings</a>. These MeSH headings include not only topic areas but geographic
+      regions &mdash; around 15% of all indexed records are tagged with the name of a continent, country or city. Mapping MEDLINE searches your results against these goegraphical headings. Of course some articles might mention a country name in a title or abstract
+       <em>without</em> a corresponding index term, so Mapping MEDLINE searches those fields by country name as well.
+       <img src="dengue-africa.png" />
+    </p>
+    <h2>Proportional Maps</h2>
+    <p>By default, Mapping MEDLINE maps the raw number of results, but it is also possible (by chosing the buttom at the bottom right of your chart) to show a <em>porportional</em> view. This is an way of seeing whether or not there is any significant variation in the prevalence of
+      results from one country to another. Mapping that focuses on raw counts alone will tend to bury any regional variations for a search underneath the fact that
+    there are just a <em>lot</em> more researchers publishing things in and about some places than there are for others.
+    <img src="cattle-asia.png" />
+  </p>
+  <h2>Comparing proportions</h2>
+    <p>Once you have done more than one search, you can compare the proportions for each in a given region.
+      <img src="wine-vs-beer.png" />
     </p>
 
-      For ease of searching it is <em>also</em> possible to narrow your subject search by applying <a href="https://www.nlm.nih.gov/mesh/subhierarchy.html">subheadings</a> such as "diagnosis" or "physiology".
-      If you are an experienced MEDLINE searcher, you may be used to using these subheadings. What you might not realize however is that is also possible to search using <a href="https://www.nlm.nih.gov/bsd/disted/pubmedtutorial/020_730.html">"floating"</a>
-      subheadings &mdash; returning results where that subheading is attached to any MeSH heading used to index the record.</p>
-
-      <p>MeSH Subheading Graph takes a MEDLINE search and shows how the subjects in your results stack up against these subheadings. For each search you'll see <em>two</em> graphs &mdash; one showing percentages compared to those for
-        all of MEDLINE and another showing relative proportion. Once you have completed at least two searches, you can compare the proportions of one search against another.</p>
-      <p>It is instructive to see where the proportions for a given search land. For example, a search for "medicine" returns results where the proportion of subheadings in each category is roughly
-        the same as for MEDLINE as a whole. A search for "disease" on the other hand shows a substantial increase in the proportion of results for "etiology" and "diagnosis". Articles about "taxes" show radically different proportions; they
-        are mostly indexed by subjects with the subheading "organization and administration".</p>
-
-		<h2>License</h2>
-		<p>Please note that the information provided here comes ultimately from the <a href="http://www.ncbi.nlm.nih.gov/">National Center for Biotechnology Information</a> and is subject to the terms listed under their
-		<a href="http://www.ncbi.nlm.nih.gov/About/disclaimer.html">Disclaimer and Copyright notice</a>.</p>
-    <p>Feel free to us this tool as you wish, but if you use a Subheading Graph for publication, I'd appreciate a citation:
-      <blockquote>
-        Sperr E. MeSH Subheading Graph [Internet]. 2016 [cited <em>your_date_here</em>]. Available from http://esperr.github.io/mesh-subhead-graph/
-      </blockquote>
-    </p>
 	</div>
 	</div>
 </div>
 
-     <div class="col-sm-5 col-md-5 col-lg-5">
+<div class="col-sm-5 col-md-5 col-lg-5">
  <div class="panel panel-default">
 <div class="panel-body">
-<h2>Contact</h2>
-<p>MeSH Subheading Graph is a experimental project of Ed Sperr, M.L.I.S.</p>
+<h3>Contact</h3>
+<p>Mapping MEDLINE is a experimental project of Ed Sperr, M.L.I.S.</p>
 <p>Ed can be reached at <a href="mailto:ed_sperr@hotmail.com">ed_sperr@hotmail.com</a> or <a href="mailto:esperr@uga.edu">esperr@uga.edu</a>.</p>
       </div>
    </div>
-   </div>
 
-
-<div class="col-sm-5 col-md-5 col-lg-5">
 	<div class="panel panel-default">
 	<div class="panel-body">
-		<h2>Technologies</h2>
+    <h3>Caveats</h3>
+    <p>The scale for each choropleth is variable, so small differences for one search may be represented the same way a larger difference for a different
+      search would on another. Because the search for countries is in part a text-word search, false drops are a possibility.</p>
+
+		<h3>Technologies</h3>
 		<p>MeSH Subheading Graph is lashed together with bailing wire and and <a href="http://jquery.com/">jQuery</a>. It utuilizes NCBI's <a href="http://www.ncbi.nlm.nih.gov/books/NBK25501/">Entrez Programming Utilities</a> for searching
 		PubMed and <a href="https://developers.google.com/chart/">Google Charts</a> for visualizing the graphs. Responsive layout made easier with <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
     <p>You can find the source code for this application at <a href="https://github.com/esperr/mesh-cat-graph">GitHub</a>.</p>
+
+    <h3>License</h3>
+		<p>Please note that the information provided here comes ultimately from the <a href="http://www.ncbi.nlm.nih.gov/">National Center for Biotechnology Information</a> and is subject to the terms listed under their
+		<a href="http://www.ncbi.nlm.nih.gov/About/disclaimer.html">Disclaimer and Copyright notice</a>.</p>
+    <p>Feel free to us this tool as you wish, but if you use Mapping MEDLINE for publication, I'd appreciate a citation:
+      <blockquote>
+        Sperr E. MeSH Subheading Graph [Internet]. 2016 [cited <em>your_date_here</em>]. Available from http://esperr.github.io/mesh-subhead-graph/
+      </blockquote>
+    </p>
+
   </div>
 	</div>
+
+
 
   <div class="panel panel-default">
   <div class="panel-body">
@@ -85,4 +91,8 @@
 
 </div>
 </div>
+
+
+
+
 </body>

@@ -572,7 +572,7 @@ function drawMap(regindex, searchIndex, charttype) {
     $( "#hiddendiv" ).remove();
     console.log(type);
     var c2 = document.createElement("canvas");
-    c2.width = 900;
+    c2.width = 860;
     c2.height = 575;
     //var c2 = document.getElementById("myCanvas2");
     var ctx2 = c2.getContext("2d");
@@ -582,7 +582,7 @@ function drawMap(regindex, searchIndex, charttype) {
 
     background.onload = function(){
           ctx2.beginPath();
-          ctx2.rect(0, 0, 900, 575);
+          ctx2.rect(0, 0, 860, 575);
           ctx2.fillStyle = "white";
           ctx2.fill();
           ctx2.drawImage(background,5,55,850,500);
