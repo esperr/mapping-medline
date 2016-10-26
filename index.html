@@ -122,7 +122,7 @@ var regions = { "regions":
 "Singapore", "Thailand", "Timor-Leste", "Vietnam", "Bangladesh", "Bhutan", "India", "Afghanistan", "Bahrain", "Iran", "Iraq", "Israel", "Jordan", "Kuwait", "Lebanon", "Oman", "Qatar", "Saudi Arabia",
 "Syria", "Turkey", "United Arab Emirates", "Yemen", "Nepal", "Pakistan", "Sri Lanka", "China", "Hong Kong", "Macau", "Tibet", "Japan", "Democratic People's Republic of Korea", "Republic of Korea",
 "Mongolia", "Taiwan", "Armenia", "Azerbaijan", "Georgia (Republic)"] },
-{"region": "Caribbean", "mapcode": "029", "countries":["Antigua and Barbuda", "Bahamas", "Barbados", "British Virgin Islands", "Cuba", "Dominica", "Dominican Republic", "Grenada", "Guadeloupe", "Haiti", "Jamaica", "Martinique",
+{"region": "Caribbean Region", "mapcode": "029", "countries":["Antigua and Barbuda", "Bahamas", "Barbados", "British Virgin Islands", "Cuba", "Dominica", "Dominican Republic", "Grenada", "Guadeloupe", "Haiti", "Jamaica", "Martinique",
 "Netherlands Antilles", "Puerto Rico", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Trinidad and Tobago", "United States Virgin Islands", "Turks and Caicos", "Anguilla", "Cayman Islands", "Montserrat", "Saint Martin", "Sint Maarten" ] },
 {"region": "Central America", "mapcode": "013", "countries":["Belize", "Costa Rica", "El Salvador", "Guatemala", "Honduras", "Mexico", "Nicaragua", "Panama"] },
 {"region": "Europe", "mapcode": "150", "countries":["Andorra", "Austria", "Belgium", "Albania", "Estonia", "Latvia", "Lithuania", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Czech Republic", "Hungary", "Kosovo", "Macedonia (Republic)",
@@ -131,7 +131,7 @@ var regions = { "regions":
   "Greece", "Ireland", "Italy", "Liechtenstein", "Luxembourg", "Cyprus", "Malta", "Sicily", "Monaco", "Netherlands", "Portugal", "San Marino", "Denmark",
   "Greenland", "Finland", "Iceland", "Norway", "Sweden", "Spain", "Switzerland", "Vatican City", "Faroe Islands", "Russia"] },
 {"region": "North America", "mapcode": "021", "countries":["Canada", "Greenland", "United States", "Bermuda"] },
-{"region": "Oceana", "mapcode": "009", "countries":["Australia", "Fiji", "New Caledonia", "Papua New Guinea", "Vanuatu", "Guam", "Palau", "New Zealand", "Hawaii", "Pitcairn Island", "American Samoa", "Independent State of Samoa", "Tonga", "Solomon Islands"] },
+{"region": "Oceania", "mapcode": "009", "countries":["Australia", "Fiji", "New Caledonia", "Papua New Guinea", "Vanuatu", "Guam", "Palau", "New Zealand", "Hawaii", "Pitcairn Island", "American Samoa", "Independent State of Samoa", "Tonga", "Solomon Islands"] },
 {"region": "South America", "mapcode": "005", "countries":["Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Ecuador", "French Guiana", "Guyana", "Paraguay", "Peru", "Suriname", "Uruguay", "Venezuela", "Falkland Islands"]}]
 };
 
@@ -218,14 +218,15 @@ $( "#past" ).on( "click", ".pastsearch", function() {
 $( "#past" ).on( "click", "#showcompare", function() {
     $( "#past" ).empty();
     $( "#past" ).append("<p>Choose any two searches to compare</p>");
+    $( "#past" ).append("<select id='compareregion'>");
+    for (var i = 0; i < regions.regions.length; i++) {
+      $( "#past select" ).append('<option value="' + i + '">' + regions.regions[i].region + '</option>');
+    }
     $( "#past" ).append("<dl>");
     for (var i = 1; i < searches.length; i++) {
       $( "#past dl" ).append('<dt><input type="checkbox" name="term" id="' + i + '" value="' + i + '"> <label for="' + i + '">' + searches[i].term + '</label></dt>');
     }
-    $( "#past dl" ).append("<select id='compareregion'>");
-    for (var i = 0; i < regions.regions.length; i++) {
-      $( "#past select" ).append('<option value="' + i + '">' + regions.regions[i].region + '</option>');
-    }
+
         $("#past dl").after('<input id="compare" type="button" value="Compare" /><p style="margin-top: 1em;"><a href="#!" class="showsearches">(go back to search list)</a></p>')
     });
 
@@ -298,7 +299,7 @@ function startOver() {
 
 function dosearch(term) {
      //while (catCounts.length) { catCounts.pop(); }
-     var searchstr = term;
+     var searchstr = term + " AND (Africa OR Asia OR Caribbean Region OR Central America OR Europe OR North America OR Oceania OR South America OR Geographic Locations[mesh])";
      psearch(searchstr, function( data ) {
        // e.g. filter the response
        if (!data.esearchresult.count) {
@@ -440,11 +441,13 @@ function psearch(searchstr, callback) {
 function displayCounts(regionIndex, searchIndex) {
   if (regionIndex == "Regions") {
     $("#results").empty();
-    $("#results").append("<h3>")
-    $("#results h3").append(searches[searchIndex].count + ' results for ' + searches[searchIndex].term);
+    $("#results").append("<h3>");
+    $("#results h3").append(Number(searches[searchIndex].count).toLocaleString() + ' geographically tagged results for ' + searches[searchIndex].term);
+    $("#results").append("<p>Select a region below to see the map</p>");
     $.each( searches[searchIndex].regions, function( i, regionitem ) {
+      console.log(regionitem);
       //$("#chart_div").append('<div>' + regionitem.region + ' -- ' + regionitem.count + '</div>');
-      $("#results").append('<div class="regionsearch"><a href="#!">' + regionitem.region + "</a></div>");
+      $("#results").append('<a href="#!"><div class="regionsearch">' + regionitem.region + "<span class='regioncount'>" + Number(regionitem.count).toLocaleString() + "<span></div></a>");
       $("#results div").last().data("region", i);
       $("#results div").last().data("searchIndex", searchIndex);
     });
@@ -468,13 +471,13 @@ function compareTerms(searchone, searchtwo, compareregion) {
   var termOne = searches[searchone].regions[compareregion].countries;
   if (termOne.length < 1) {
     getCatCounts(searches[searchone].term, compareregion, searchone, "true");
-    alert("Need to find country counts for " + searches[searchone].term + " in " + regions.regions[compareregion].region);
+    alert("We need to get country counts for '" + searches[searchone].term + "' in " + regions.regions[compareregion].region);
     return;
   }
   var termTwo = searches[searchtwo].regions[compareregion].countries;
   if (termTwo.length < 1) {
     getCatCounts(searches[searchtwo].term, compareregion, searchtwo, "true");
-    alert("Need to find country counts for " + searches[searchtwo].term + " in " + regions.regions[compareregion].region);
+    alert("We need to find country counts for '" + searches[searchtwo].term + "' in " + regions.regions[compareregion].region);
     return;
   }
   $.each( termOne, function( i, country ) {
