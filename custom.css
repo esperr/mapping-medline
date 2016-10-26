@@ -13,7 +13,7 @@ margin-bottom: 60px;
 
 #topbanner {
   color: white;
-  background-color: rgb(193,71,70);
+  background-color: #2EA132;
   font-family: "Century Gothic", Helvetica, sans-serif;
   padding-top: .8em;
   padding-bottom: 1em;
@@ -42,7 +42,7 @@ margin-bottom: 60px;
      float: right;
      right: 5%;
    }
-   
+
  #past dl { padding: 1em;
             margin-bottom: 0; }
 
@@ -99,10 +99,32 @@ margin-bottom: 60px;
   }
 
   #about:hover, #about:focus {
-  	background-color: rgb(237,203,202);
+  	background-color: #E4E3D2;
   }
 
 #results { margin-bottom: 7em; }
+
+.regionsearch {
+  padding: .6em;
+  margin: .4em;
+  border: 1.5px solid #212013;
+  font-weight: bold;
+  font-size: 1.2em;
+  width: 35%;
+  float: left;
+  border-radius: 4px;
+  background-color: #eeede2;
+}
+
+.regionsearch:hover, .regionsearch:focus {
+  background-color: #E4E3D2;
+}
+
+.regioncount {
+  float: right;
+  font-weight: normal;
+  font-size: normal;
+}
 
 .footer {
   position: absolute;
