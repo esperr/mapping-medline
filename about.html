@@ -10,15 +10,15 @@
 </head>
 
 <body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <div class="container">
 <div id="topbanner" class="jumbotron">
-	<h1>About MeSH Subheading Graph</h1>
+	<h1>About Mapping MEDLINE</h1>
 	<a id="about" class="label label-default" href="index.html">Home</a>
 </div>
    <div class="row">
 
-<div class="col-sm-7 col-md-7 col-lg-7">
+<div class="col-sm-7 col-md-7 col-lg-7 aboutleft">
 	<div class="panel panel-default">
 	<div class="panel-body">
 		<h2>Why Mapping MEDLINE?</h2>
@@ -28,12 +28,12 @@
     <p>Most citations in PubMed are from MEDLINE, and MEDLINE records are indexed with (typically around 10 to 12) <a href="https://www.nlm.nih.gov/mesh/2016/mesh_browser/index.html">Medical Subject Headings</a>. These MeSH headings include not only topic areas but geographic
       regions &mdash; around 15% of all indexed records are tagged with the name of a continent, country or city. Mapping MEDLINE searches your results against these goegraphical headings. Of course some articles might mention a country name in a title or abstract
        <em>without</em> a corresponding index term, so Mapping MEDLINE searches those fields by country name as well.
-       <img src="dengue-africa.png" />
+       <img id="first" src="dengue-africa.png" />
     </p>
     <h2>Proportional Maps</h2>
     <p>By default, Mapping MEDLINE maps the raw number of results, but it is also possible (by chosing the buttom at the bottom right of your chart) to show a <em>porportional</em> view. This is an way of seeing whether or not there is any significant variation in the prevalence of
       results from one country to another. Mapping that focuses on raw counts alone will tend to bury any regional variations for a search underneath the fact that
-    there are just a <em>lot</em> more researchers publishing things in and about some places than there are for others.
+    there are just a <em>lot</em> more researchers publishing things in and about some places (like China) than there are for others (such as Iran).
     <img src="cattle-asia.png" />
   </p>
   <h2>Comparing proportions</h2>
@@ -57,20 +57,20 @@
 	<div class="panel panel-default">
 	<div class="panel-body">
     <h3>Caveats</h3>
-    <p>The scale for each choropleth is variable, so small differences for one search may be represented the same way a larger difference for a different
-      search would on another. Because the search for countries is in part a text-word search, false drops are a possibility.</p>
+    <p>The scale for each choropleth is variable, so small differences for one search could be represented by the same colors as for a much larger difference in another
+      search. Because the search for countries is in part a <em>text-word</em> search, there is a potential for false hits in a given search.</p>
 
 		<h3>Technologies</h3>
-		<p>MeSH Subheading Graph is lashed together with bailing wire and and <a href="http://jquery.com/">jQuery</a>. It utuilizes NCBI's <a href="http://www.ncbi.nlm.nih.gov/books/NBK25501/">Entrez Programming Utilities</a> for searching
-		PubMed and <a href="https://developers.google.com/chart/">Google Charts</a> for visualizing the graphs. Responsive layout made easier with <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
-    <p>You can find the source code for this application at <a href="https://github.com/esperr/mesh-cat-graph">GitHub</a>.</p>
+		<p>Mapping MEDLINE is lashed together with bailing wire and and <a href="http://jquery.com/">jQuery</a>. It utuilizes NCBI's <a href="http://www.ncbi.nlm.nih.gov/books/NBK25501/">Entrez Programming Utilities</a> for searching
+		PubMed and <a href="https://developers.google.com/chart/interactive/docs/gallery/geochart">Google Charts</a> for drawing the maps. Responsive layout made easier with <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
+    <p>You can find the source code for this application at <a href="https://github.com/esperr/mapping-medline/">GitHub</a>.</p>
 
     <h3>License</h3>
 		<p>Please note that the information provided here comes ultimately from the <a href="http://www.ncbi.nlm.nih.gov/">National Center for Biotechnology Information</a> and is subject to the terms listed under their
 		<a href="http://www.ncbi.nlm.nih.gov/About/disclaimer.html">Disclaimer and Copyright notice</a>.</p>
     <p>Feel free to us this tool as you wish, but if you use Mapping MEDLINE for publication, I'd appreciate a citation:
       <blockquote>
-        Sperr E. MeSH Subheading Graph [Internet]. 2016 [cited <em>your_date_here</em>]. Available from http://esperr.github.io/mesh-subhead-graph/
+        Sperr E. Mapping MEDLINE [Internet]. 2016 [cited <em>your_date_here</em>]. Available from http://esperr.github.io/mapping-medline/
       </blockquote>
     </p>
 
@@ -83,7 +83,7 @@
   <div class="panel-body">
     <h2>See also...</h2>
     <p>Want to have even more fun with MEDLINE visualizations? Check out <a href="http://esperr.github.io/mesh-cat-graph/">
-      MeSH Category Graph</a> and <a href="https://pubvenn.appspot.com/">PubVenn</a>.</p>
+      MeSH Category Graph</a>, <a href="https://esperr.github.io/mesh-subhead-graph/">MeSH Subheading Graph</a> and <a href="https://pubvenn.appspot.com/">PubVenn</a>.</p>
   </div>
   </div>
 
@@ -91,8 +91,14 @@
 
 </div>
 </div>
+<script>
+(function() {
+var currentwidth = $(".aboutleft").innerWidth() * .9;
+console.log(currentwidth);
+$("img").width(currentwidth);
+})
 
-
-
+();
+</script>
 
 </body>
