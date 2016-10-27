@@ -13,16 +13,16 @@ margin-bottom: 60px;
 
 #topbanner {
   color: white;
-  background-color: #2EA132;
+  background-color: #258229;
   font-family: "Century Gothic", Helvetica, sans-serif;
   padding-top: .8em;
   padding-bottom: 1em;
-
   }
 
 #topbanner h1 {
   font-size:
 }
+
 #search {
     border: 1px solid grey;
     border-radius: 10px;
@@ -43,14 +43,6 @@ margin-bottom: 60px;
      right: 5%;
    }
 
- #past dl { padding: 1em;
-            margin-bottom: 0; }
-
-#past p {
-  margin-left: 1em;
-}
-
- #compare, #showcompare { margin: 1em; }
 
  #left{
    min-width: 700px;
@@ -104,6 +96,18 @@ margin-bottom: 60px;
 
 #results { margin-bottom: 7em; }
 
+#past dl, #past p, #past input, #past select {
+  margin-left: 1em;
+}
+
+#past dl {
+  margin-top: 1em;
+}
+
+#past [type="button"] {
+  margin-bottom: 1em;
+}
+
 .regionsearch {
   padding: .6em;
   margin: .4em;
@@ -120,10 +124,17 @@ margin-bottom: 60px;
   background-color: #E4E3D2;
 }
 
+.chartnote {
+  color: gray;
+}
 .regioncount {
   float: right;
   font-weight: normal;
   font-size: normal;
+}
+
+.example {
+  margin-top: 2em;
 }
 
 .footer {
