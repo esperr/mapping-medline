@@ -1,1 +1,238 @@
-searches = [{"term":"all[sb]","count":"26567328","regions":[{"region":"Africa","count":"245164","proportion":0.009228026243361772,"countries":[{"country":"Algeria","count":3224,"proportion":0.00012135206069650663},{"country":"Angola","count":1215,"proportion":0.00004573286406521574},{"country":"Benin","count":2813,"proportion":0.00010588193137074229},{"country":"Botswana","count":1980,"proportion":0.00007452763032849972},{"country":"Burkina Faso","count":3422,"proportion":0.0001288048237293566},{"country":"Burundi","count":810,"proportion":0.00003048857604347716},{"country":"Cameroon","count":5992,"proportion":0.00022554018228705574},{"country":"Cape Verde","count":445,"proportion":0.000016749896715243626},{"country":"Central African Republic","count":997,"proportion":0.000037527296685613246},{"country":"Chad","count":1024,"proportion":0.00003854358255372915},{"country":"Comoros","count":377,"proportion":0.000014190361936285048},{"country":"Congo","count":9483,"proportion":0.0003569421810127085},{"country":"Cote d'Ivoire","count":3211,"proportion":0.00012086273787111749},{"country":"Democratic Republic of the Congo","count":3542,"proportion":0.00013332164980987173},{"country":"Djibouti","count":335,"proportion":0.000012609472808104751},{"country":"Egypt","count":16888,"proportion":0.00063566799039783},{"country":"Equatorial Guinea","count":373,"proportion":0.000014039801066934544},{"country":"Eritrea","count":427,"proportion":0.000016072372803166357},{"country":"Ethiopia","count":11025,"proportion":0.000414983396147328},{"country":"Gabon","count":1773,"proportion":0.00006673610533961112},{"country":"Gambia","count":2812,"proportion":0.00010584429115340466},{"country":"Ghana","count":7930,"proportion":0.00029848692348737515},{"country":"Guinea","count":731,"proportion":0.0000275149988738047},{"country":"Guinea-Bissau","count":1050,"proportion":0.000039522228204507434},{"country":"Kenya","count":16700,"proportion":0.0006285916295383563},{"country":"Lesotho","count":569,"proportion":0.000021417283665109267},{"country":"Liberia","count":1429,"proportion":0.00005378787057546773},{"country":"Libya","count":1401,"proportion":0.0000527339444900142},{"country":"Madagascar","count":4187,"proportion":0.0001575995899926406},{"country":"Malawi","count":5343,"proportion":0.00020111168123493637},{"country":"Mali","count":3104,"proportion":0.00011683523461599149},{"country":"Mauritania","count":565,"proportion":0.00002126672279575876},{"country":"Mauritius","count":876,"proportion":0.00003297283038776049},{"country":"Morocco","count":6072,"proportion":0.00022855139967406583},{"country":"Mozambique","count":2775,"proportion":0.0001044516031119125},{"country":"Namibia","count":1293,"proportion":0.00004866880101755058},{"country":"Niger","count":10223,"proportion":0.00038479594184255187},{"country":"Nigeria","count":29781,"proportion":0.0011209633125318437},{"country":"Reunion","count":2093,"proportion":0.00007878097488765148},{"country":"Rwanda","count":2464,"proportion":0.00009274549551991077},{"country":"Senegal","count":6544,"proportion":0.00024631758225742535},{"country":"Sierra Leone","count":1723,"proportion":0.00006485409447272981},{"country":"Somalia","count":1740,"proportion":0.00006549397816746946},{"country":"South Africa","count":42428,"proportion":0.0015969991412008013},{"country":"South Sudan","count":285,"proportion":0.000010727461941223445},{"country":"Sudan","count":7627,"proportion":0.00028708193763407445},{"country":"Swaziland","count":694,"proportion":0.00002612231083231253},{"country":"Tanzania","count":11475,"proportion":0.0004319214939492598},{"country":"Togo","count":1284,"proportion":0.000048330039061511946},{"country":"Tunisia","count":8142,"proportion":0.0003064666495629519},{"country":"Uganda","count":12113,"proportion":0.00045593595261066524},{"country":"Western Sahara","count":54,"proportion":0.0000020325717362318107},{"country":"Zambia","count":4754,"proportion":0.0001789415932230746},{"country":"Zimbabwe","count":6296,"proportion":0.00023698280835769407}]},{"region":"Asia","count":"661308","proportion":0.024891776847110858,"countries":[{"country":"Afghanistan","count":5273,"proportion":0.00019847686602130255},{"country":"Armenia","count":1568,"proportion":0.000059019860785397766},{"country":"Azerbaijan","count":1576,"proportion":0.00005932098252409877},{"country":"Bahrain","count":786,"proportion":0.000029585210827374136},{"country":"Bangladesh","count":11192,"proportion":0.00042126931244271156},{"country":"Bhutan","count":476,"proportion":0.000017916743452710035},{"country":"Borneo","count":1050,"proportion":0.000039522228204507434},{"country":"Brunei","count":288,"proportion":0.000010840382593236324},{"country":"Cambodia","count":3544,"proportion":0.00013339693024454698},{"country":"China","count":170381,"proportion":0.006413177870202077},{"country":"Georgia","count":1455,"proportion":0.00005476651622624601},{"country":"Hong Kong","count":19022,"proportion":0.0007159922141963241},{"country":"India","count":115183,"proportion":0.00433551315359979},{"country":"Indonesia","count":11580,"proportion":0.0004358737167697105},{"country":"Iran","count":30600,"proportion":0.0011517906505313594},{"country":"Iraq","count":7039,"proportion":0.00026494948983955027},{"country":"Israel","count":32098,"proportion":0.0012081756961031234},{"country":"Japan","count":159533,"proportion":0.006004856792523509},{"country":"Jordan","count":5239,"proportion":0.00019719709863182328},{"country":"Kazakhstan","count":2789,"proportion":0.00010497856615463927},{"country":"Kuwait","count":3487,"proportion":0.0001312514378563023},{"country":"Kyrgyzstan","count":1342,"proportion":0.00005051317166709426},{"country":"Laos","count":2126,"proportion":0.00008002310205979314},{"country":"Lebanon","count":4438,"proportion":0.00016704728454438475},{"country":"Macau","count":258,"proportion":0.00000971117607310754},{"country":"Malaysia","count":16328,"proportion":0.0006145894686887594},{"country":"Mekong Valley","count":28,"proportion":0.0000010539260854535316},{"country":"Mongolia","count":3226,"proportion":0.00012142734113118188},{"country":"Myanmar","count":2582,"proportion":0.00009718704116575065},{"country":"Nepal","count":7990,"proportion":0.00030074533652763274},{"country":"North Korea","count":193,"proportion":0.000007264561946161842},{"country":"Oman","count":2268,"proportion":0.00008536801292173606},{"country":"Pakistan","count":17412,"proportion":0.0006553914642827461},{"country":"Philippines","count":9824,"proportion":0.00036977749512483903},{"country":"Qatar","count":1208,"proportion":0.00004546938254385236},{"country":"Russia","count":54049,"proportion":0.0020344161068813543},{"country":"Saudi Arabia","count":14315,"proportion":0.000538819711188118},{"country":"Singapore","count":14712,"proportion":0.0005537628774711556},{"country":"South Korea","count":15926,"proportion":0.0005994581013190337},{"country":"Sri Lanka","count":6456,"proportion":0.00024300524313171427},{"country":"Syria","count":1798,"proportion":0.00006767711077305178},{"country":"Taiwan","count":39220,"proportion":0.0014762493239816965},{"country":"Tajikistan","count":831,"proportion":0.00003127902060756731},{"country":"Thailand","count":29359,"proportion":0.0011050791408153654},{"country":"Tibet","count":2630,"proportion":0.0000989937715979567},{"country":"Timor-Leste","count":255,"proportion":0.000009598255421094662},{"country":"Turkey","count":34928,"proportion":0.0013146975111686054},{"country":"Turkmenistan","count":691,"proportion":0.00002600939018029965},{"country":"United Arab Emirates","count":2114,"proportion":0.00007957141945174162},{"country":"Uzbekistan","count":2081,"proportion":0.00007832929227959997},{"country":"Vietnam","count":14108,"proportion":0.0005310281861992293},{"country":"Yemen","count":1758,"proportion":0.00006617150207954672}]},{"region":"Caribbean","count":"11361","proportion":0.00042763050917277043,"countries":[{"country":"Anguilla","count":54,"proportion":0.0000020325717362318107},{"country":"Antigua and Barbuda","count":117,"proportion":0.000004403905428502257},{"country":"Bahamas","count":708,"proportion":0.000026649273875039297},{"country":"Barbados","count":957,"proportion":0.0000360216879921082},{"country":"British Virgin Islands","count":47,"proportion":0.000001769090214868428},{"country":"Cayman Islands","count":68,"proportion":0.0000025595347789585766},{"country":"Cuba","count":5957,"proportion":0.00022422277468023882},{"country":"Dominica","count":388,"proportion":0.000014604404326998936},{"country":"Dominican Republic","count":1915,"proportion":0.00007208101620155403},{"country":"Grenada","count":275,"proportion":0.000010351059767847184},{"country":"Guadeloupe","count":875,"proportion":0.00003293519017042286},{"country":"Haiti","count":3356,"proportion":0.00012632056938507327},{"country":"Jamaica","count":4214,"proportion":0.00015861587586075648},{"country":"Martinique","count":714,"proportion":0.000026875115179065053},{"country":"Montserrat","count":109,"proportion":0.000004102783689801248},{"country":"Netherlands Antilles","count":326,"proportion":0.000012270710852066117},{"country":"Puerto Rico","count":7734,"proportion":0.0002911094408892004},{"country":"Saint Kitts and Nevis","count":84,"proportion":0.0000031617782563605945},{"country":"Saint Lucia","count":108,"proportion":0.000004065143472463621},{"country":"Saint Martin","count":53,"proportion":0.0000019949315188941847},{"country":"Saint Vincent and the Grenadines","count":54,"proportion":0.0000020325717362318107},{"country":"Sint Maarten","count":3,"proportion":1.1292065201287837e-7},{"country":"Trinidad and Tobago","count":1791,"proportion":0.0000674136292516884},{"country":"Turks and Caicos Islands","count":27,"proportion":0.0000010162858681159053},{"country":"United States Virgin Islands","count":235,"proportion":0.00000884545107434214}]},{"region":"Central America","count":"15166","proportion":0.0005708515361424378,"countries":[{"country":"Belize","count":779,"proportion":0.00002932172930601075},{"country":"Costa Rica","count":4566,"proportion":0.00017186523236360088},{"country":"El Salvador","count":1212,"proportion":0.00004561994341320286},{"country":"Guatemala","count":3560,"proportion":0.000133999173721949},{"country":"Honduras","count":1547,"proportion":0.00005822941622130762},{"country":"Mexico","count":46131,"proportion":0.0017363808660020308},{"country":"Nicaragua","count":1755,"proportion":0.00006605858142753386},{"country":"Panama","count":3819,"proportion":0.00014374799001239417}]},{"region":"Europe","count":"1255247","proportion":0.04724776989240318,"countries":[{"country":"Albania","count":1075,"proportion":0.00004046323363794808},{"country":"Andorra","count":52,"proportion":0.0000019572913015565586},{"country":"Austria","count":22268,"proportion":0.0008381723596742586},{"country":"Belgium","count":22214,"proportion":0.0008361397879380267},{"country":"Bosnia and Herzegovina","count":2192,"proportion":0.00008250735640407646},{"country":"Bulgaria","count":7204,"proportion":0.0002711601257002586},{"country":"Channel Islands","count":231,"proportion":0.000008694890204991634},{"country":"Croatia","count":7550,"proportion":0.0002841836408990772},{"country":"Cyprus","count":1628,"proportion":0.00006127827382565532},{"country":"Czech Republic","count":8860,"proportion":0.00033349232561136747},{"country":"Denmark","count":52052,"proportion":0.001959248592858115},{"country":"England ","count":116824,"proportion":0.0043972807502508345},{"country":"Estonia","count":2897,"proportion":0.00010904370962710288},{"country":"Faroe Islands","count":394,"proportion":0.000014830245631024693},{"country":"Finland","count":38344,"proportion":0.0014432764935939362},{"country":"France","count":111559,"proportion":0.004199105005968233},{"country":"Germany","count":171012,"proportion":0.006436928847342119},{"country":"Gibraltar","count":271,"proportion":0.00001020049889849668},{"country":"Great Britain","count":328440,"proportion":0.012362552982369924},{"country":"Greece","count":20348,"proportion":0.0007659031423860164},{"country":"Greenland","count":3269,"proportion":0.0001230458704766998},{"country":"Guernsey","count":228,"proportion":0.000008581969552978757},{"country":"Hungary","count":20320,"proportion":0.0007648492163005628},{"country":"Iceland","count":5471,"proportion":0.00020592962905415253},{"country":"Ireland","count":23668,"proportion":0.0008908686639469351},{"country":"Italy","count":100544,"proportion":0.0037844980119942813},{"country":"Kosovo","count":725,"proportion":0.00002728915756977894},{"country":"Latvia","count":1585,"proportion":0.00005965974448013741},{"country":"Liechtenstein","count":248,"proportion":0.000009334773899731279},{"country":"Lithuania","count":3107,"proportion":0.00011694815526800437},{"country":"Luxembourg","count":1042,"proportion":0.00003922110646580642},{"country":"Macedonia","count":436,"proportion":0.00001641113475920499},{"country":"Malta","count":1193,"proportion":0.00004490477928378797},{"country":"Moldova","count":807,"proportion":0.000030375655391464284},{"country":"Monaco","count":283,"proportion":0.000010652181506548194},{"country":"Montenegro","count":663,"proportion":0.00002495546409484612},{"country":"Netherlands","count":72849,"proportion":0.0027420521928287257},{"country":"Northern Ireland","count":6218,"proportion":0.00023404687140535924},{"country":"Norway","count":45572,"proportion":0.0017153399845102977},{"country":"Poland","count":48157,"proportion":0.0018126399463280613},{"country":"Portugal","count":13404,"proportion":0.0005045294731935405},{"country":"Republic of Belarus","count":1976,"proportion":0.00007437706945914922},{"country":"Romania","count":10751,"proportion":0.00040466997659681847},{"country":"Russia","count":54049,"proportion":0.0020344161068813543},{"country":"San Marino","count":101,"proportion":0.0000038016619511002384},{"country":"Scotland","count":27861,"proportion":0.0010486940952436014},{"country":"Serbia","count":3910,"proportion":0.00014717324979011815},{"country":"Sicily","count":2492,"proportion":0.00009379942160536431},{"country":"Slovakia","count":3819,"proportion":0.00014374799001239417},{"country":"Slovenia","count":3315,"proportion":0.0001247773204742306},{"country":"Spain","count":78593,"proportion":0.00295825760121605},{"country":"Sweden","count":78488,"proportion":0.002954305378395599},{"country":"Switzerland","count":40668,"proportion":0.0015307523586865792},{"country":"Ukraine","count":16182,"proportion":0.0006090939969574659},{"country":"Vatican City","count":71,"proportion":0.000002672455430971455},{"country":"Wales","count":25302,"proportion":0.0009523727790766162}]},{"region":"North America","count":"1375005","proportion":0.05175548704032261,"countries":[{"country":"Bermuda","count":802,"proportion":0.000030187454304776152},{"country":"Canada","count":160987,"proportion":0.006059585668532417},{"country":"Greenland","count":3269,"proportion":0.0001230458704766998},{"country":"United States","count":1284596,"proportion":0.04835247263104517}]},{"region":"Oceana","count":"19","proportion":7.151641294148964e-7,"countries":[{"country":"American Samoa","count":313,"proportion":0.000011781388026676977},{"country":"Australia","count":143621,"proportion":0.005405925654247201},{"country":"Fiji","count":1377,"proportion":0.00005183057927391117},{"country":"Guam","count":1149,"proportion":0.00004324860972093242},{"country":"Hawaii","count":9172,"proportion":0.0003452360734207068},{"country":"Independent State of Samoa","count":244,"proportion":0.000009184213030380774},{"country":"New Caledonia","count":1308,"proportion":0.000049233404277614973},{"country":"New Zealand","count":59434,"proportion":0.0022371086772444712},{"country":"Palau","count":355,"proportion":0.000013362277154857275},{"country":"Papua New Guinea","count":4674,"proportion":0.0001759303758360645},{"country":"Pitcairn Island","count":15,"proportion":5.646032600643919e-7},{"country":"Solomon Islands","count":626,"proportion":0.000023562776053353953},{"country":"Tonga","count":435,"proportion":0.000016373494541867365},{"country":"Vanuatu","count":565,"proportion":0.00002126672279575876}]},{"region":"South America","count":"126379","proportion":0.004756933026911852,"countries":[{"country":"Argentina","count":17418,"proportion":0.0006556173055867719},{"country":"Bolivia","count":3229,"proportion":0.00012154026178319476},{"country":"Brazil","count":87858,"proportion":0.003306994214849156},{"country":"Chile","count":14582,"proportion":0.0005488696492172642},{"country":"Colombia","count":10661,"proportion":0.00040128235703643214},{"country":"Ecuador","count":4027,"proportion":0.00015157715521862042},{"country":"Falkland Islands","count":168,"proportion":0.000006323556512721189},{"country":"French Guiana","count":1241,"proportion":0.00004671150971599402},{"country":"Guyana","count":1046,"proportion":0.00003937166733515693},{"country":"Paraguay","count":1259,"proportion":0.00004738903362807129},{"country":"Peru","count":9762,"proportion":0.00036744380164990625},{"country":"Suriname","count":980,"proportion":0.000036887412990873604},{"country":"Uruguay","count":2481,"proportion":0.00009338537921465042},{"country":"Venezuela","count":6209,"proportion":0.0002337081094493206}]}]}]
+//manually retrieved October 27, 2016
+searches = [{"term":"all[sb]","count":"3752874","regions":[{"region":"Africa","count":"245547","proportion":0.06542905517211609,"countries":[{"country":"Algeria","count":3231,"proportion":0.0008609401754495355}
+,{"country":"Angola","count":1218,"proportion":0.00032455126391133833}
+,{"country":"Benin","count":2824,"proportion":0.0007524899583625776}
+,{"country":"Botswana","count":1988,"proportion":0.0005297273502920695}
+,{"country":"Burkina Faso","count":3429,"proportion":0.0009136997405188663}
+,{"country":"Burundi","count":811,"proportion":0.00021610104682438046}
+,{"country":"Cameroon","count":6001,"proportion":0.0015990411615204774}
+,{"country":"Cape Verde","count":445,"proportion":0.0001185757901810719}
+,{"country":"Central African Republic","count":999,"proportion":0.0002661959873952603}
+,{"country":"Chad","count":1025,"proportion":0.000273124011091233}
+,{"country":"Comoros","count":377,"proportion":0.00010045634359160473}
+,{"country":"Congo","count":9499,"proportion":0.002531126811078656}
+,{"country":"Cote d'Ivoire","count":3213,"proportion":0.0008561438513523236}
+,{"country":"Democratic Republic of the Congo","count":3547,"proportion":0.0009451423096005888}
+,{"country":"Djibouti","count":336,"proportion":0.0000895313831479554}
+,{"country":"Egypt","count":16917,"proportion":0.004507745264029648}
+,{"country":"Equatorial Guinea","count":373,"proportion":0.00009939049379222431}
+,{"country":"Eritrea","count":427,"proportion":0.00011377946608385999}
+,{"country":"Ethiopia","count":11051,"proportion":0.0029446765332382593}
+,{"country":"Gabon","count":1773,"proportion":0.0004724379235753718}
+,{"country":"Gambia","count":2815,"proportion":0.0007500917963139716}
+,{"country":"Ghana","count":7953,"proportion":0.0021191758636181232}
+,{"country":"Guinea","count":734,"proportion":0.00019558343818630735}
+,{"country":"Guinea-Bissau","count":1052,"proportion":0.00028031849723705085}
+,{"country":"Kenya","count":16727,"proportion":0.004457117398559077}
+,{"country":"Lesotho","count":571,"proportion":0.00015215005886155518}
+,{"country":"Liberia","count":1430,"proportion":0.0003810413032785007}
+,{"country":"Libya","count":1406,"proportion":0.0003746462044822182}
+,{"country":"Madagascar","count":4192,"proportion":0.0011170105897506818}
+,{"country":"Malawi","count":5357,"proportion":0.0014274393438202294}
+,{"country":"Mali","count":3109,"proportion":0.0008284317565684326}
+,{"country":"Mauritania","count":566,"proportion":0.00015081774661232964}
+,{"country":"Mauritius","count":879,"proportion":0.00023422049341384764}
+,{"country":"Morocco","count":6078,"proportion":0.0016195587701585505}
+,{"country":"Mozambique","count":2782,"proportion":0.0007412985354690832}
+,{"country":"Namibia","count":1296,"proportion":0.0003453353349992566}
+,{"country":"Niger","count":10237,"proportion":0.002727776099064344}
+,{"country":"Nigeria","count":29805,"proportion":0.007941913317633366}
+,{"country":"Reunion","count":2138,"proportion":0.0005696967177688353}
+,{"country":"Rwanda","count":2471,"proportion":0.0006584287135672554}
+,{"country":"Senegal","count":6551,"proportion":0.0017455955089352854}
+,{"country":"Sierra Leone","count":1727,"proportion":0.00046018065088249696}
+,{"country":"Somalia","count":1742,"proportion":0.00046417758763017355}
+,{"country":"South Africa","count":42511,"proportion":0.011327585205365275}
+,{"country":"South Sudan","count":288,"proportion":0.00007674118555539035}
+,{"country":"Sudan","count":7641,"proportion":0.0020360395792664502}
+,{"country":"Swaziland","count":695,"proportion":0.00018519140264234825}
+,{"country":"Tanzania","count":11497,"proportion":0.0030635187858691765}
+,{"country":"Togo","count":1297,"proportion":0.00034560179744910167}
+,{"country":"Tunisia","count":8153,"proportion":0.0021724683535871443}
+,{"country":"Uganda","count":12136,"proportion":0.003233788291320199}
+,{"country":"Western Sahara","count":54,"proportion":0.00001438897229163569}
+,{"country":"Zambia","count":4760,"proportion":0.0012683612612627015}
+,{"country":"Zimbabwe","count":6305,"proportion":0.0016800457462733895}
+]}
+,{"region":"Asia","count":"662529","proportion":0.17653910043342783,"countries":[{"country":"Afghanistan","count":5286,"proportion":0.001408520509881227}
+,{"country":"Armenia","count":1571,"proportion":0.00041861250870666057}
+,{"country":"Azerbaijan","count":1578,"proportion":0.0004204777458555763}
+,{"country":"Bahrain","count":786,"proportion":0.00020943948557825283}
+,{"country":"Bangladesh","count":11208,"proportion":0.002986511137863941}
+,{"country":"Bhutan","count":477,"proportion":0.00012710258857611526}
+,{"country":"Borneo","count":1052,"proportion":0.00028031849723705085}
+,{"country":"Brunei","count":288,"proportion":0.00007674118555539035}
+,{"country":"Cambodia","count":3555,"proportion":0.0009472740091993496}
+,{"country":"China","count":170879,"proportion":0.04553283696708176}
+,{"country":"Georgia","count":1457,"proportion":0.0003882357894243185}
+,{"country":"Hong Kong","count":19051,"proportion":0.005076376131999102}
+,{"country":"India","count":115395,"proportion":0.030748434399875936}
+,{"country":"Indonesia","count":11595,"proportion":0.003089632105953997}
+,{"country":"Iran","count":30704,"proportion":0.008181463060044115}
+,{"country":"Iraq","count":7056,"proportion":0.0018801590461070637}
+,{"country":"Israel","count":32134,"proportion":0.008562504363322617}
+,{"country":"Japan","count":159733,"proportion":0.04256284650110822}
+,{"country":"Jordan","count":5250,"proportion":0.0013989278616868032}
+,{"country":"Kazakhstan","count":2791,"proportion":0.0007436966975176891}
+,{"country":"Kuwait","count":3494,"proportion":0.0009310197997587982}
+,{"country":"Kyrgyzstan","count":1345,"proportion":0.00035839199504166674}
+,{"country":"Laos","count":2128,"proportion":0.0005670320932703842}
+,{"country":"Lebanon","count":4442,"proportion":0.001183626202211958}
+,{"country":"Macau","count":259,"proportion":0.00006901377450988229}
+,{"country":"Malaysia","count":16360,"proportion":0.004359325679465924}
+,{"country":"Mekong Valley","count":28,"proportion":0.000007460948595662951}
+,{"country":"Mongolia","count":3232,"proportion":0.0008612066378993806}
+,{"country":"Myanmar","count":2589,"proportion":0.0006898712826489778}
+,{"country":"Nepal","count":8020,"proportion":0.002137028847757745}
+,{"country":"North Korea","count":193,"proportion":0.00005142725282010534}
+,{"country":"Oman","count":2272,"proportion":0.0006054026860480795}
+,{"country":"Pakistan","count":17448,"proportion":0.004649236824897399}
+,{"country":"Philippines","count":9837,"proportion":0.0026211911191263014}
+,{"country":"Qatar","count":1214,"proportion":0.0003234854141119579}
+,{"country":"Russia","count":54076,"proportion":0.014409223437823918}
+,{"country":"Saudi Arabia","count":14354,"proportion":0.0038248020050766426}
+,{"country":"Singapore","count":14737,"proportion":0.003926857123367318}
+,{"country":"South Korea","count":16001,"proportion":0.004263665659971531}
+,{"country":"Sri Lanka","count":6467,"proportion":0.0017232126631482965}
+,{"country":"Syria","count":1800,"proportion":0.00047963240972118967}
+,{"country":"Taiwan","count":39302,"proportion":0.010472507203812332}
+,{"country":"Tajikistan","count":832,"proportion":0.00022169675827112768}
+,{"country":"Thailand","count":29396,"proportion":0.007832930175646718}
+,{"country":"Tibet","count":2639,"proportion":0.000703194405141233}
+,{"country":"Timor-Leste","count":255,"proportion":0.00006794792471050187}
+,{"country":"Turkey","count":34975,"proportion":0.00931952418333256}
+,{"country":"Turkmenistan","count":691,"proportion":0.00018412555284296782}
+,{"country":"United Arab Emirates","count":2116,"proportion":0.000563834543872243}
+,{"country":"Uzbekistan","count":2081,"proportion":0.0005545083581276642}
+,{"country":"Vietnam","count":14129,"proportion":0.0037648479538614937}
+,{"country":"Yemen","count":1760,"proportion":0.00046897391172738545}
+]}
+,{"region":"Caribbean Region","count":"26465","proportion":0.007051928735150714,"countries":[{"country":"Anguilla","count":54,"proportion":0.00001438897229163569}
+,{"country":"Antigua and Barbuda","count":117,"proportion":0.00003117610663187733}
+,{"country":"Bahamas","count":710,"proportion":0.0001891883393900248}
+,{"country":"Barbados","count":959,"proportion":0.00025553748940145606}
+,{"country":"British Virgin Islands","count":47,"proportion":0.000012523735142719953}
+,{"country":"Cayman Islands","count":68,"proportion":0.000018119446589467166}
+,{"country":"Cuba","count":5963,"proportion":0.0015889155884263634}
+,{"country":"Dominica","count":389,"proportion":0.000103653892989746}
+,{"country":"Dominican Republic","count":1919,"proportion":0.0005113414412527572}
+,{"country":"Grenada","count":276,"proportion":0.00007354363615724908}
+,{"country":"Guadeloupe","count":876,"proportion":0.00023342110606431232}
+,{"country":"Haiti","count":3366,"proportion":0.0008969126061786247}
+,{"country":"Jamaica","count":4215,"proportion":0.001123139226097119}
+,{"country":"Martinique","count":714,"proportion":0.00019025418918940524}
+,{"country":"Montserrat","count":109,"proportion":0.000029044407033116486}
+,{"country":"Netherlands Antilles","count":326,"proportion":0.00008686675864950435}
+,{"country":"Puerto Rico","count":7742,"proportion":0.0020629522867008057}
+,{"country":"Saint Kitts and Nevis","count":84,"proportion":0.00002238284578698885}
+,{"country":"Saint Lucia","count":108,"proportion":0.00002877794458327138}
+,{"country":"Saint Martin","count":53,"proportion":0.000014122509841790584}
+,{"country":"Saint Vincent and the Grenadines","count":54,"proportion":0.00001438897229163569}
+,{"country":"Sint Maarten","count":3,"proportion":7.993873495353161e-7}
+,{"country":"Trinidad and Tobago","count":1792,"proportion":0.00047750071012242886}
+,{"country":"Turks and Caicos Islands","count":27,"proportion":0.000007194486145817845}
+,{"country":"United States Virgin Islands","count":236,"proportion":0.00006288513816344487}
+]}
+,{"region":"Central America","count":"15181","proportion":0.004045166451098545,"countries":[{"country":"Belize","count":782,"proportion":0.0002083736357788724}
+,{"country":"Costa Rica","count":4582,"proportion":0.001220930945190273}
+,{"country":"El Salvador","count":1216,"proportion":0.00032401833901164815}
+,{"country":"Guatemala","count":3567,"proportion":0.0009504715585974909}
+,{"country":"Honduras","count":1552,"proportion":0.00041354972215960353}
+,{"country":"Mexico","count":46222,"proportion":0.012316427356740461}
+,{"country":"Nicaragua","count":1760,"proportion":0.00046897391172738545}
+,{"country":"Panama","count":3822,"proportion":0.0010184194833079928}
+]}
+,{"region":"Europe","count":"1256625","proportion":0.3348433760366055,"countries":[{"country":"Albania","count":1078,"proportion":0.0002872465209330236}
+,{"country":"Andorra","count":52,"proportion":0.00001385604739194548}
+,{"country":"Austria","count":22297,"proportion":0.005941313244196314}
+,{"country":"Belgium","count":22245,"proportion":0.005927457196804369}
+,{"country":"Bosnia and Herzegovina","count":2193,"proportion":0.0005843521525103161}
+,{"country":"Bulgaria","count":7213,"proportion":0.0019219936507327451}
+,{"country":"Channel Islands","count":231,"proportion":0.00006155282591421934}
+,{"country":"Croatia","count":7553,"proportion":0.002012590883680081}
+,{"country":"Cyprus","count":1635,"proportion":0.00043566610549674727}
+,{"country":"Czech Republic","count":8873,"proportion":0.00236432131747562}
+,{"country":"Denmark","count":52118,"proportion":0.013887489961027202}
+,{"country":"England ","count":117056,"proportion":0.031191028529068656}
+,{"country":"Estonia","count":2899,"proportion":0.0007724746421009605}
+,{"country":"Faroe Islands","count":394,"proportion":0.00010498620523897152}
+,{"country":"Finland","count":38381,"proportion":0.010227095287504989}
+,{"country":"France","count":111676,"proportion":0.02975746054890199}
+,{"country":"Germany","count":171222,"proportion":0.04562423358737863}
+,{"country":"Gibraltar","count":274,"proportion":0.00007301071125755888}
+,{"country":"Great Britain","count":328732,"proportion":0.08759473406248118}
+,{"country":"Greece","count":20377,"proportion":0.005429705340493712}
+,{"country":"Greenland","count":3272,"proportion":0.0008718651358931848}
+,{"country":"Guernsey","count":228,"proportion":0.000060753438564684025}
+,{"country":"Hungary","count":20331,"proportion":0.005417448067800837}
+,{"country":"Iceland","count":5478,"proportion":0.0014596813002514873}
+,{"country":"Ireland","count":23740,"proportion":0.006325818559322802}
+,{"country":"Italy","count":100681,"proportion":0.026827705912855056}
+,{"country":"Kosovo","count":727,"proportion":0.0001937182010373916}
+,{"country":"Latvia","count":1586,"proportion":0.0004226094454543371}
+,{"country":"Liechtenstein","count":248,"proportion":0.00006608268756158614}
+,{"country":"Lithuania","count":3109,"proportion":0.0008284317565684326}
+,{"country":"Luxembourg","count":1043,"proportion":0.0002779203351884449}
+,{"country":"Macedonia","count":436,"proportion":0.00011617762813246594}
+,{"country":"Malta","count":1196,"proportion":0.000318689090014746}
+,{"country":"Moldova","count":808,"proportion":0.00021530165947484514}
+,{"country":"Monaco","count":283,"proportion":0.00007540887330616482}
+,{"country":"Montenegro","count":663,"proportion":0.00017666460424730488}
+,{"country":"Netherlands","count":72944,"proportion":0.019436836941501365}
+,{"country":"Northern Ireland","count":6241,"proportion":0.0016629921494833028}
+,{"country":"Norway","count":45624,"proportion":0.012157082811733088}
+,{"country":"Poland","count":48209,"proportion":0.012845888244582685}
+,{"country":"Portugal","count":13441,"proportion":0.003581521788368061}
+,{"country":"Republic of Belarus","count":1977,"proportion":0.0005267962633437734}
+,{"country":"Romania","count":10761,"proportion":0.002867402422783179}
+,{"country":"Russia","count":54076,"proportion":0.014409223437823918}
+,{"country":"San Marino","count":101,"proportion":0.000026912707434355642}
+,{"country":"Scotland","count":27923,"proportion":0.007440430987024877}
+,{"country":"Serbia","count":3923,"proportion":0.0010453321907423483}
+,{"country":"Sicily","count":2497,"proportion":0.0006653567372632281}
+,{"country":"Slovakia","count":3824,"proportion":0.001018952408207683}
+,{"country":"Slovenia","count":3326,"proportion":0.0008862541081848205}
+,{"country":"Spain","count":78738,"proportion":0.020980720375903907}
+,{"country":"Sweden","count":78576,"proportion":0.020937553459029}
+,{"country":"Switzerland","count":40705,"proportion":0.010846354020945014}
+,{"country":"Ukraine","count":16185,"proportion":0.004312694750743031}
+,{"country":"Vatican City","count":71,"proportion":0.000018918833939002483}
+,{"country":"Wales","count":25389,"proportion":0.006765215139117381}
+]}
+,{"region":"North America","count":"1376160","proportion":0.36669496497884024,"countries":[{"country":"Bermuda","count":803,"proportion":0.00021396934722561962}
+,{"country":"Canada","count":161288,"proportion":0.04297719561061736}
+,{"country":"Greenland","count":3272,"proportion":0.0008718651358931848}
+,{"country":"United States","count":1285718,"proportion":0.3425955680899492}
+]}
+,{"region":"Oceania","count":"149014","proportion":0.039706635501218536,"countries":[{"country":"American Samoa","count":314,"proportion":0.00008366920925136309}
+,{"country":"Australia","count":143882,"proportion":0.038339150208613455}
+,{"country":"Fiji","count":1378,"proportion":0.00036718525588655523}
+,{"country":"Guam","count":1150,"proportion":0.0003064318173218712}
+,{"country":"Hawaii","count":9178,"proportion":0.0024455923646783772}
+,{"country":"Independent State of Samoa","count":244,"proportion":0.0000650168377622057}
+,{"country":"New Caledonia","count":1309,"proportion":0.00034879934684724294}
+,{"country":"New Zealand","count":59515,"proportion":0.015858512702531448}
+,{"country":"Palau","count":356,"proportion":0.00009486063214485752}
+,{"country":"Papua New Guinea","count":4678,"proportion":0.001246511340375403}
+,{"country":"Pitcairn Island","count":15,"proportion":0.0000039969367476765805}
+,{"country":"Solomon Islands","count":632,"proportion":0.0001684042683021066}
+,{"country":"Tonga","count":436,"proportion":0.00011617762813246594}
+,{"country":"Vanuatu","count":565,"proportion":0.00015055128416248455}
+]}
+,{"region":"South America","count":"126551","proportion":0.03372108949034793,"countries":[{"country":"Argentina","count":17449,"proportion":0.004649503287347243}
+,{"country":"Bolivia","count":3233,"proportion":0.0008614731003492256}
+,{"country":"Brazil","count":88043,"proportion":0.023460153471712614}
+,{"country":"Chile","count":14607,"proportion":0.003892217004887454}
+,{"country":"Colombia","count":10686,"proportion":0.002847417739044796}
+,{"country":"Ecuador","count":4037,"proportion":0.0010757089100246905}
+,{"country":"Falkland Islands","count":168,"proportion":0.0000447656915739777}
+,{"country":"French Guiana","count":1242,"proportion":0.00033094636270762087}
+,{"country":"Guyana","count":1049,"proportion":0.00027951910988751553}
+,{"country":"Paraguay","count":1259,"proportion":0.0003354762243549877}
+,{"country":"Peru","count":9779,"proportion":0.0026057362970352857}
+,{"country":"Suriname","count":980,"proportion":0.0002611332008482033}
+,{"country":"Uruguay","count":2485,"proportion":0.0006621591878650868}
+,{"country":"Venezuela","count":6216,"proportion":0.001656330588237175}
+]}
+]}
+];
