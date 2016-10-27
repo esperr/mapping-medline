@@ -5,6 +5,13 @@
   <link href="custom.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-433406-7', 'auto');
+    ga('send', 'pageview');
 
   </script>
 </head>
@@ -42,8 +49,6 @@ Designed and built by Ed Sperr (esperr@uga.edu or ed_sperr@hotmail.com)
 <div id="printable">
   <div id="printable-stuff">
   <span class="close">×</span>
-  <!--<canvas id="myCanvas2" width="900" height="550" >
-    Your browser does not support the HTML5 canvas tag.</canvas>-->
   </div>
 </div>
 
@@ -80,7 +85,7 @@ Designed and built by Ed Sperr (esperr@uga.edu or ed_sperr@hotmail.com)
 <footer class="footer">
   <div class="container">
     <span class="text-muted">  <p>Design and contruction by Ed Sperr, M.L.I.S. (<a href="mailto:ed_sperr@hotmail.com">ed_sperr@hotmail.com</a>)   |
-      Data from <a href="http://www.ncbi.nlm.nih.gov/">NCBI</a>  |   Charting tools from  <a href="https://developers.google.com/chart/interactive/docs/gallery/barchart" target="_blank">Google</a>
+      Data from <a href="http://www.ncbi.nlm.nih.gov/">NCBI</a>  |   Charting tools from  <a href="https://developers.google.com/chart/interactive/docs/gallery/geochart" target="_blank">Google</a>
      | See the code at <a href="https://github.com/esperr/mapping-medline">GitHub</a></p></span>
   </div>
 </footer>
@@ -160,7 +165,7 @@ function locationConvert (area) {
     else { locationString = area }
     return locationString;
 }
-//get baseline counts
+//manually get baseline counts
 //term = "all[sb]";
 //dosearch(term);
 //alert("done!");
@@ -196,11 +201,6 @@ function showWait() {
   $( "#results" ).on( "click", ".regionsearch", function() {
       var region = $(this).data("region");
       var searchIndex = $(this).data("searchIndex");
-      //var regionName = "";
-      //if (region == 0) { regionName = "Africa"; }
-      //if (region == 1) { regionName = "Americas"; }
-      //if (region == 2) { regionName = "Asia"; }
-      //if (region == 3) { regionName = "Europe"; }
       if (searches[searchIndex].regions[region].countries.length < 1) {
         getCatCounts(searches[searchIndex].term, region, searchIndex);
       } else {
@@ -237,7 +237,6 @@ $( "#past" ).on( "click", "#compare", function() {
     var searchone = $("input[name='term']:checked").first().val();
     var searchtwo = $("input[name='term']:checked").last().val();
     var compareregion = $( "#past option:selected" ).val();
-    console.log(compareregion);
     compareTerms(searchone, searchtwo, compareregion);
     });
 
@@ -248,20 +247,6 @@ $( "#past" ).on( "click", ".showsearches", function() {
 $( "#results" ).on( "click", ".printMe", function() {
     getprint($(this).data("type"));
     });
-
-//$( "#results" ).on( "click", "#showcounts", function() {
-//    var charttype = 'counts';
-//    var searchIndex = $(this).attr("name");
-//    var region = $(this).data("region");
-//    drawMap (region, searchIndex);
-//   });
-
-//$( "#results" ).on( "click", "#showprops", function() {
-//   var charttype = 'counts';
-//   var searchIndex = $(this).attr("name");
-//   var region = $(this).data("region");
-//   drawMap (region, searchIndex);
-//  });
 
 function showSearches() {
   $( "#past" ).empty();
@@ -385,7 +370,6 @@ function getCatCounts(term, regionIndex, searchIndex, compare) {
           } else {
             keysrt(areaCounts, 'country');
             mySearch.regions[regionIndex].countries = areaCounts.slice(0);
-            console.log(JSON.stringify(areaCounts));
           }
           displayCounts(regionIndex, searchIndex);
         }
@@ -442,7 +426,6 @@ function displayCounts(regionIndex, searchIndex) {
     $("#results h3").append(Number(searches[searchIndex].count).toLocaleString() + " geographically tagged results for '" + searches[searchIndex].term + "'");
     $("#results").append("<p>(Select a region below to see the map)</p>");
     $.each( searches[searchIndex].regions, function( i, regionitem ) {
-      console.log(regionitem);
       //$("#chart_div").append('<div>' + regionitem.region + ' -- ' + regionitem.count + '</div>');
       $("#results").append('<a href="#!"><div class="regionsearch">' + regionitem.region + "<span class='regioncount'>" + Number(regionitem.count).toLocaleString() + "<span></div></a>");
       $("#results div").last().data("region", i);
@@ -459,7 +442,6 @@ function displayCounts(regionIndex, searchIndex) {
     drawMap(regionIndex, searchIndex);
   }
   showSearches();
-  //console.log(JSON.stringify(searches[searchIndex]));
 }
 
 function compareTerms(searchone, searchtwo, compareregion) {
@@ -488,7 +470,6 @@ function compareTerms(searchone, searchtwo, compareregion) {
     });
   $("#chart_div").before("<h3>Proportion of <span style='color:red'>'" + searches[searchone].term + "'</span> vs <span style='color:blue'>'" + searches[searchtwo].term + "'</span> in MEDLINE</h3>")
   var data = google.visualization.arrayToDataTable(termCompArray);
-  console.log(JSON.stringify(termCompArray) );
   data.setColumnProperty(2, 'role', 'tooltip');
   data.setColumnProperty(2, 'html', true);
   var options = {
@@ -507,74 +488,52 @@ function compareTerms(searchone, searchtwo, compareregion) {
 
 function drawMap(regindex, searchIndex) {
   $("#results").empty();
-  //console.log(regionName + " " + searchIndex + " " + charttype);
   options.region = regions.regions[regindex].mapcode;
-    var countryCompArray =  [['Country', 'Comparison', 'Tooltip']];
-    //var countryCountArray =  [['Country', 'Results', 'Tooltip']];
-    showDone();
-    $( "#results" ).append( '<div id="chart_div">' );
-    var mySearch = searches[searchIndex];
-    var countries = mySearch.regions[regindex].countries;
-    var basecountries = searches[0].regions[regindex].countries;
-    //if (charttype == "proportional") {
-      $("#chart_div").before("<h3>Proportion of MEDLINE citations for '" + mySearch.term + "' in " + regions.regions[regindex].region + "</h3>")
-      $.each( countries, function( i, countryitem ) {
-           comparison = countryitem.proportion - basecountries[i].proportion;
-           tipText = "<strong>" + countryitem.count.toLocaleString() + "</strong> results &mdash; <span class='chartnote'>(" + Math.round10((countryitem.proportion*100), -2) + "% of search total)</br>" + countryitem.country + " represents " + Math.round10((basecountries[i].proportion*100), -2) + "% of all geotagged MEDLINE results</span>";
-           countryCompArray.push([countryitem.country, comparison, tipText]);
-           });
-      var data = google.visualization.arrayToDataTable(countryCompArray);
-      data.setColumnProperty(2, 'role', 'tooltip');
-      data.setColumnProperty(2, 'html', true);
-      //options.colorAxis = {colors: ['#D3FDEC', '#FDFBB7', '#FFCA8B', '#FF7761', '#EC4D94']};
-      //var options = compOptions;
-      //$("#chart_div").after('<input id="showcounts" class="toggleview" type="button" name="' + searchIndex + '"value="Show raw counts" />')
-      //$("#showcounts").data("region", regindex);
-    //} else {
-      //$("#chart_div").before("<h3>Count of MEDLINE citations for '" + mySearch.term + "' in " + regions.regions[regindex].region + "</h3>")
-      //$.each( countries, function( i, countryitem ) {
-        //var tipText = '';
-        //tipText = "<strong>" + countryitem.count.toLocaleString() + "</strong> results <br/>(out of " + basecountries[i].count.toLocaleString() + " for the country)";
-          // countryCountArray.push([countryitem.country, countryitem.count, tipText]);
-        //   });
-      //var data = google.visualization.arrayToDataTable(countryCountArray);
-      //data.setColumnProperty(2, 'role', 'tooltip');
-    //  data.setColumnProperty(2, 'html', true);
-  //    options.colorAxis = {minValue: 0,  colors: ['#EEE6DB', '#109618']};
-      //var options = countOptions;
-    //  $("#chart_div").after('<input id="showprops" class="toggleview" type="button" name="' + searchIndex + '" value="Show proportions" />')
-    //  $("#showprops").data("region", regindex);
-    //}
-    $("#chart_div").after('<a href="#!" class="printMe">Printable version</a></dt>');
-    var chart = new google.visualization.GeoChart( document.getElementById('chart_div') );
-    $("#results").prepend('<p class="displayregions"><a href="#!">Back to region list</a></p>');
+  var countryCompArray =  [['Country', 'Comparison', 'Tooltip']];
+  showDone();
+  $( "#results" ).append( '<div id="chart_div">' );
+  var mySearch = searches[searchIndex];
+  var countries = mySearch.regions[regindex].countries;
+  var basecountries = searches[0].regions[regindex].countries;
+  $("#chart_div").before("<h3>Proportion of MEDLINE citations for '" + mySearch.term + "' in " + regions.regions[regindex].region + "</h3>")
+  $("#chart_div").before('<em>Hover over a country for details and click to search it.</em>');
 
-    //Here comes the clicky bit...
-    function selectHandler() {
-    var selectedItem = chart.getSelection()[0];
-    if (selectedItem) {
-      var selectstate = data.getValue(selectedItem.row, 0);
-      var resultsURL = 'https://www.ncbi.nlm.nih.gov/pubmed/';
-      resultsURL = resultsURL + '?term=' + mySearch.term + '+AND+(' + selectstate + '[mesh]+OR+' + selectstate + '[tiab])';
-       window.open(resultsURL,'_blank');
-    }
+  $.each( countries, function( i, countryitem ) {
+       comparison = countryitem.proportion - basecountries[i].proportion;
+       tipText = "<strong>" + countryitem.count.toLocaleString() + "</strong> results &mdash; <span class='chartnote'>(" + Math.round10((countryitem.proportion*100), -2) + "% of search total)</br>" + countryitem.country + " represents " + Math.round10((basecountries[i].proportion*100), -2) + "% of all geotagged MEDLINE results</span>";
+       countryCompArray.push([countryitem.country, comparison, tipText]);
+       });
+  var data = google.visualization.arrayToDataTable(countryCompArray);
+  data.setColumnProperty(2, 'role', 'tooltip');
+  data.setColumnProperty(2, 'html', true);
+  $("#chart_div").after('<a href="#!" class="printMe">Printable version</a></dt>');
+  var chart = new google.visualization.GeoChart( document.getElementById('chart_div') );
+  $("#results").prepend('<p class="displayregions"><a href="#!">Back to region list</a></p>');
+
+  //Here comes the clicky bit...
+  function selectHandler() {
+  var selectedItem = chart.getSelection()[0];
+  if (selectedItem) {
+    var selectstate = data.getValue(selectedItem.row, 0);
+    var resultsURL = 'https://www.ncbi.nlm.nih.gov/pubmed/';
+    resultsURL = resultsURL + '?term=' + mySearch.term + '+AND+(' + selectstate + '[mesh]+OR+' + selectstate + '[tiab])';
+     window.open(resultsURL,'_blank');
+   }
   }
 
-    google.visualization.events.addListener(chart, 'select', selectHandler);
-    google.visualization.events.addListener(chart, 'ready', function () {
-      dataURL = chart.getImageURI();
-    });
-    chart.draw(data, options);
+  google.visualization.events.addListener(chart, 'select', selectHandler);
+  google.visualization.events.addListener(chart, 'ready', function () {
+    dataURL = chart.getImageURI();
+  });
+  chart.draw(data, options);
   }
 
   function getprint(type) {
     $( "#printable img" ).remove();
     $( "#hiddendiv" ).remove();
-    console.log(type);
     var c2 = document.createElement("canvas");
     c2.width = 860;
     c2.height = 575;
-    //var c2 = document.getElementById("myCanvas2");
     var ctx2 = c2.getContext("2d");
     ctx2.clearRect(0, 0, c2.width, c2.height);
     var background = new Image();
