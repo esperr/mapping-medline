@@ -50,7 +50,10 @@ Designed and built by Ed Sperr (esperr@uga.edu or ed_sperr@hotmail.com)
 <div id="results">
 <div id="chart_div">
   <div id="splash">
-    <p>Enter your MEDLINE search above, and Mapping MEDLINE will plot it against a map<em><a href="about.html">(more)</a></em></p>
+    <p>The biomedical sciences are a global endeavor, and <a href="http://www.ncbi.nlm.nih.gov/pubmed">PubMed</a> contains citations from researchers and clinicians investigating things around the world.
+      Mapping MEDLINE graphs that geographical diversity by taking the results of your PubMed search and displaying them as a
+      <a href="https://en.wikipedia.org/wiki/Choropleth_map">choropleth map</a> showing the proportion of results for your search in each country.
+      <em><a href="about.html">(more)</a></em></p>
     </div>
 </div>
 </div>
@@ -78,7 +81,7 @@ Designed and built by Ed Sperr (esperr@uga.edu or ed_sperr@hotmail.com)
   <div class="container">
     <span class="text-muted">  <p>Design and contruction by Ed Sperr, M.L.I.S. (<a href="mailto:ed_sperr@hotmail.com">ed_sperr@hotmail.com</a>)   |
       Data from <a href="http://www.ncbi.nlm.nih.gov/">NCBI</a>  |   Charting tools from  <a href="https://developers.google.com/chart/interactive/docs/gallery/barchart" target="_blank">Google</a>
-     | See the code at <a href="https://github.com/esperr/mesh-subhead-graph">GitHub</a></p></span>
+     | See the code at <a href="https://github.com/esperr/mapping-medline">GitHub</a></p></span>
   </div>
 </footer>
 
@@ -227,7 +230,7 @@ $( "#past" ).on( "click", "#showcompare", function() {
       $( "#past dl" ).append('<dt><input type="checkbox" name="term" id="' + i + '" value="' + i + '"> <label for="' + i + '">' + searches[i].term + '</label></dt>');
     }
 
-        $("#past dl").after('<input id="compare" type="button" value="Compare" /><p style="margin-top: 1em;"><a href="#!" class="showsearches">(go back to search list)</a></p>')
+        $("#past dl").after('<input id="compare" type="button" value="Compare" /><p><a href="#!" class="showsearches">(go back to search list)</a></p>')
     });
 
 $( "#past" ).on( "click", "#compare", function() {
@@ -246,19 +249,19 @@ $( "#results" ).on( "click", ".printMe", function() {
     getprint($(this).data("type"));
     });
 
-$( "#results" ).on( "click", "#showcounts", function() {
-    var charttype = 'counts';
-    var searchIndex = $(this).attr("name");
-    var region = $(this).data("region");
-    drawMap (region, searchIndex, "counts");
-   });
+//$( "#results" ).on( "click", "#showcounts", function() {
+//    var charttype = 'counts';
+//    var searchIndex = $(this).attr("name");
+//    var region = $(this).data("region");
+//    drawMap (region, searchIndex);
+//   });
 
-$( "#results" ).on( "click", "#showprops", function() {
-   var charttype = 'counts';
-   var searchIndex = $(this).attr("name");
-   var region = $(this).data("region");
-   drawMap (region, searchIndex, "proportional");
-  });
+//$( "#results" ).on( "click", "#showprops", function() {
+//   var charttype = 'counts';
+//   var searchIndex = $(this).attr("name");
+//   var region = $(this).data("region");
+//   drawMap (region, searchIndex);
+//  });
 
 function showSearches() {
   $( "#past" ).empty();
@@ -274,12 +277,6 @@ function showSearches() {
       $("#past dl").after('<input id="showcompare" type="button" value="Compare searches" />')
     }
  }
-
-
- //Printable modal stuff
- //$( "#left" ).on( "click", ".printMe", function() {
-//     $("#printable").css("display", "block");
-  //   });
 
  //they can only select two terms to compare....
  $( "#past" ).on( "change", "input[name='term']:checked", function() {
@@ -442,8 +439,8 @@ function displayCounts(regionIndex, searchIndex) {
   if (regionIndex == "Regions") {
     $("#results").empty();
     $("#results").append("<h3>");
-    $("#results h3").append(Number(searches[searchIndex].count).toLocaleString() + ' geographically tagged results for ' + searches[searchIndex].term);
-    $("#results").append("<p>Select a region below to see the map</p>");
+    $("#results h3").append(Number(searches[searchIndex].count).toLocaleString() + " geographically tagged results for '" + searches[searchIndex].term + "'");
+    $("#results").append("<p>(Select a region below to see the map)</p>");
     $.each( searches[searchIndex].regions, function( i, regionitem ) {
       console.log(regionitem);
       //$("#chart_div").append('<div>' + regionitem.region + ' -- ' + regionitem.count + '</div>');
@@ -451,6 +448,7 @@ function displayCounts(regionIndex, searchIndex) {
       $("#results div").last().data("region", i);
       $("#results div").last().data("searchIndex", searchIndex);
     });
+    $("#results").append("<p><em>Note:</em> Use the 'Back to region list' link to return to this list</p>");
   } else {
     //$("#results").empty();
     //$("#results").append(JSON.stringify(searches));
@@ -458,7 +456,7 @@ function displayCounts(regionIndex, searchIndex) {
     //$("#results").prepend('<p class="displayregions"><a href="#!">Back to region list</a></p>');
 
     showDone();
-    drawMap(regionIndex, searchIndex, "counts");
+    drawMap(regionIndex, searchIndex);
   }
   showSearches();
   //console.log(JSON.stringify(searches[searchIndex]));
@@ -484,8 +482,8 @@ function compareTerms(searchone, searchtwo, compareregion) {
     //make our first proportion negative, then add them together to find the midpoint
     oneprop = country.proportion - (country.proportion*2);
     comparison = oneprop + termTwo[i].proportion;
-    tipText = "<span style='color:red; font-weight: bold;'>" + searches[searchone].term + "</span> represents " + Math.round10((country.proportion*100), -4) + "% of total</br>" +
-              "<span style='color:blue; font-weight: bold;'>" + searches[searchtwo].term + "</span>  represents " + Math.round10((termTwo[i].proportion*100), -4) + "% of total";
+    tipText = "<span style='color:red; font-weight: bold;'>" + searches[searchone].term + "</span> represents " + Math.round10((country.proportion*100), -2) + "% of total</br>" +
+              "<span style='color:blue; font-weight: bold;'>" + searches[searchtwo].term + "</span>  represents " + Math.round10((termTwo[i].proportion*100), -2) + "% of total";
     termCompArray.push([country.country, comparison, tipText]);
     });
   $("#chart_div").before("<h3>Proportion of <span style='color:red'>'" + searches[searchone].term + "'</span> vs <span style='color:blue'>'" + searches[searchtwo].term + "'</span> in MEDLINE</h3>")
@@ -507,47 +505,46 @@ function compareTerms(searchone, searchtwo, compareregion) {
   chart.draw(data, options);
 }
 
-function drawMap(regindex, searchIndex, charttype) {
+function drawMap(regindex, searchIndex) {
   $("#results").empty();
-  console.log(regionName + " " + searchIndex + " " + charttype);
+  //console.log(regionName + " " + searchIndex + " " + charttype);
   options.region = regions.regions[regindex].mapcode;
-
     var countryCompArray =  [['Country', 'Comparison', 'Tooltip']];
-    var countryCountArray =  [['Country', 'Results', 'Tooltip']];
+    //var countryCountArray =  [['Country', 'Results', 'Tooltip']];
     showDone();
     $( "#results" ).append( '<div id="chart_div">' );
     var mySearch = searches[searchIndex];
     var countries = mySearch.regions[regindex].countries;
     var basecountries = searches[0].regions[regindex].countries;
-    if (charttype == "proportional") {
+    //if (charttype == "proportional") {
       $("#chart_div").before("<h3>Proportion of MEDLINE citations for '" + mySearch.term + "' in " + regions.regions[regindex].region + "</h3>")
       $.each( countries, function( i, countryitem ) {
            comparison = countryitem.proportion - basecountries[i].proportion;
-           tipText = "<strong>" + Math.round10((countryitem.proportion*100), -4) + "%</strong> of search total</br>" + "(" + countryitem.country + " represents " + Math.round10((basecountries[i].proportion*100), -4) + "% of all MEDLINE results)";
+           tipText = "<strong>" + countryitem.count.toLocaleString() + "</strong> results &mdash; <span class='chartnote'>(" + Math.round10((countryitem.proportion*100), -2) + "% of search total)</br>" + countryitem.country + " represents " + Math.round10((basecountries[i].proportion*100), -2) + "% of all geotagged MEDLINE results</span>";
            countryCompArray.push([countryitem.country, comparison, tipText]);
            });
       var data = google.visualization.arrayToDataTable(countryCompArray);
       data.setColumnProperty(2, 'role', 'tooltip');
       data.setColumnProperty(2, 'html', true);
-      options.colorAxis = {colors: ['#D3FDEC', '#FDFBB7', '#FFCA8B', '#FF7761', '#EC4D94']};
+      //options.colorAxis = {colors: ['#D3FDEC', '#FDFBB7', '#FFCA8B', '#FF7761', '#EC4D94']};
       //var options = compOptions;
-      $("#chart_div").after('<input id="showcounts" class="toggleview" type="button" name="' + searchIndex + '"value="Show raw counts" />')
-      $("#showcounts").data("region", regindex);
-    } else {
-      $("#chart_div").before("<h3>Count of MEDLINE citations for '" + mySearch.term + "' in " + regions.regions[regindex].region + "</h3>")
-      $.each( countries, function( i, countryitem ) {
-        var tipText = '';
-        tipText = "<strong>" + countryitem.count.toLocaleString() + "</strong> results <br/>(out of " + basecountries[i].count.toLocaleString() + " for the country)";
-           countryCountArray.push([countryitem.country, countryitem.count, tipText]);
-           });
-      var data = google.visualization.arrayToDataTable(countryCountArray);
-      data.setColumnProperty(2, 'role', 'tooltip');
-      data.setColumnProperty(2, 'html', true);
-      options.colorAxis = {minValue: 0,  colors: ['#EEE6DB', '#109618']};
+      //$("#chart_div").after('<input id="showcounts" class="toggleview" type="button" name="' + searchIndex + '"value="Show raw counts" />')
+      //$("#showcounts").data("region", regindex);
+    //} else {
+      //$("#chart_div").before("<h3>Count of MEDLINE citations for '" + mySearch.term + "' in " + regions.regions[regindex].region + "</h3>")
+      //$.each( countries, function( i, countryitem ) {
+        //var tipText = '';
+        //tipText = "<strong>" + countryitem.count.toLocaleString() + "</strong> results <br/>(out of " + basecountries[i].count.toLocaleString() + " for the country)";
+          // countryCountArray.push([countryitem.country, countryitem.count, tipText]);
+        //   });
+      //var data = google.visualization.arrayToDataTable(countryCountArray);
+      //data.setColumnProperty(2, 'role', 'tooltip');
+    //  data.setColumnProperty(2, 'html', true);
+  //    options.colorAxis = {minValue: 0,  colors: ['#EEE6DB', '#109618']};
       //var options = countOptions;
-      $("#chart_div").after('<input id="showprops" class="toggleview" type="button" name="' + searchIndex + '" value="Show proportions" />')
-      $("#showprops").data("region", regindex);
-    }
+    //  $("#chart_div").after('<input id="showprops" class="toggleview" type="button" name="' + searchIndex + '" value="Show proportions" />')
+    //  $("#showprops").data("region", regindex);
+    //}
     $("#chart_div").after('<a href="#!" class="printMe">Printable version</a></dt>');
     var chart = new google.visualization.GeoChart( document.getElementById('chart_div') );
     $("#results").prepend('<p class="displayregions"><a href="#!">Back to region list</a></p>');
