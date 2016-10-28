@@ -71,9 +71,10 @@ Designed and built by Ed Sperr (esperr@uga.edu or ed_sperr@hotmail.com)
     <h3 class="panel-title">Past searches</h3>
   </div>
   <div class="panel-body">
-    <dl></dl>
   </div>
 </div>
+<p style='clear: both; margin-bottom: 60px;'></p>
+<br />
 
 </div>
 
@@ -219,17 +220,16 @@ $( "#past" ).on( "click", ".pastsearch", function() {
     });
 
 $( "#past" ).on( "click", "#showcompare", function() {
-    $( "#past" ).empty();
-    $( "#past" ).append("<p>Choose any two searches to compare</p>");
-    $( "#past" ).append("<select id='compareregion'>");
+    $( "#past .panel-body" ).empty();
+    $( "#past .panel-body" ).append("<p>Choose any two searches to compare</p>");
+    $( "#past .panel-body" ).append("<select id='compareregion'>");
     for (var i = 0; i < regions.regions.length; i++) {
       $( "#past select" ).append('<option value="' + i + '">' + regions.regions[i].region + '</option>');
     }
-    $( "#past" ).append("<dl>");
+    $( "#past .panel-body" ).append("<dl>");
     for (var i = 1; i < searches.length; i++) {
       $( "#past dl" ).append('<dt><input type="checkbox" name="term" id="' + i + '" value="' + i + '"> <label for="' + i + '">' + searches[i].term + '</label></dt>');
     }
-
         $("#past dl").after('<input id="compare" type="button" value="Compare" /><p><a href="#!" class="showsearches">(go back to search list)</a></p>')
     });
 
@@ -249,11 +249,9 @@ $( "#results" ).on( "click", ".printMe", function() {
     });
 
 function showSearches() {
-  $( "#past" ).empty();
+  $( "#past .panel-body" ).empty();
+  $( "#past .panel-body" ).append('<dl>');
   $( "#past" ).removeClass( "hideme" );
-  $( "#past" ).append("<div class='panel-heading'>");
-  $( "#past div" ).append("<h3 class='panel-title'>Searches</h3>");
-  $( "#past" ).append("<dl>");
   for (var i = 1; i < searches.length; i++) {
     $("#past dl").append('<dt class="pastsearch"><a href="#!">' + searches[i].term + "</a></dt>");
     $("#past dt").last().data("searchIndex", i);
@@ -431,6 +429,7 @@ function displayCounts(regionIndex, searchIndex) {
       $("#results div").last().data("region", i);
       $("#results div").last().data("searchIndex", searchIndex);
     });
+    $("#results").append("<p style='clear: both;'></p>");
     $("#results").append("<p><em>Note:</em> Use the 'Back to region list' link to return to this list</p>");
   } else {
     //$("#results").empty();
