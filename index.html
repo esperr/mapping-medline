@@ -22,7 +22,7 @@ Designed and built by Ed Sperr (esperr@uga.edu or ed_sperr@hotmail.com)
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
- <!--<script src="countriesbaseline.js"></script>-->
+ <script src="countriesbaseline.js"></script>
 <script type="text/javascript" src="deciround.js"></script>
 
 <div class="container">
@@ -95,7 +95,7 @@ Designed and built by Ed Sperr (esperr@uga.edu or ed_sperr@hotmail.com)
 <script>
 
 (function() {
-
+/*
 var searches = [];
 $.get( "https://medviz-baselines.appspot.com/mapcounts", function( data ) {
   var baseline = data;
@@ -106,7 +106,7 @@ $.get( "https://medviz-baselines.appspot.com/mapcounts", function( data ) {
   //alert( JSON.stringify(baseline) );
   searches.push(baseline);
 });
-
+*/
 var search = [];
 var myMapsApiKey = 'AIzaSyCCGYq_RRoqyKK6PBQ1PUHqKA3VitSdvOI';
 google.charts.load('upcoming', {mapsApiKey: myMapsApiKey,'packages':['geochart']});
