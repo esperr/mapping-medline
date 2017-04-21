@@ -105,6 +105,7 @@ $.get( "https://medviz-baselines.appspot.com/mapcounts", function( data ) {
   //}
   //alert( JSON.stringify(baseline) );
   searches.push(baseline);
+  //console.log(searches);
 });
 
 var search = [];
@@ -336,7 +337,7 @@ function getCatCounts(term, regionIndex, searchIndex, compare) {
     $.each(regions.regions, function( index, region ) {
         geo.push(region.region);
       });
-    //console.log(geo);
+    console.log(geo);
   } else {
     $.each(regions.regions[regionIndex].countries, function( index, country ) {
         geo.push(country);
@@ -428,6 +429,11 @@ function psearch(searchstr, callback) {
 
 
 function displayCounts(regionIndex, searchIndex) {
+  console.log(JSON.stringify(searches[0]));
+  console.log(JSON.stringify(searches[0].regions[1].countries.length));
+  console.log(JSON.stringify(searches[1].regions[1].countries.length));
+
+
   if (regionIndex == "Regions") {
     $("#results").empty();
     $("#results").append("<h3>");
@@ -499,6 +505,8 @@ function drawMap(regindex, searchIndex) {
   $("#results").empty();
   options.region = regions.regions[regindex].mapcode;
   var countryCompArray =  [['Country', 'Comparison', 'Tooltip']];
+  //var countryCompArray =  [['Country', 'Comparison']];
+
   showDone();
   $( "#results" ).append( '<div id="chart_div">' );
   var mySearch = searches[searchIndex];
@@ -508,10 +516,14 @@ function drawMap(regindex, searchIndex) {
   $("#chart_div").before('<em>Hover over a country for details and click to search it.</em>');
 
   $.each( countries, function( i, countryitem ) {
+        console.log(countryitem.country + ": " + basecountries[i].country);
        comparison = countryitem.proportion - basecountries[i].proportion;
        tipText = "<strong>" + countryitem.count.toLocaleString() + "</strong> results &mdash; <span class='chartnote'>(" + Math.round10((countryitem.proportion*100), -2) + "% of search total)</br>" + countryitem.country + " represents " + Math.round10((basecountries[i].proportion*100), -2) + "% of all geotagged MEDLINE results</span>";
-       countryCompArray.push([countryitem.country, comparison, tipText]);
+       if (countryitem.country !== "Tibet") { countryCompArray.push([countryitem.country, comparison, tipText]) }
+       //countryCompArray.push([countryitem.country, comparison, tipText]);
+       //countryCompArray.push([countryitem.country, comparison]);
        });
+  console.log(JSON.stringify(countryCompArray));
   var data = google.visualization.arrayToDataTable(countryCompArray);
   data.setColumnProperty(2, 'role', 'tooltip');
   data.setColumnProperty(2, 'html', true);
