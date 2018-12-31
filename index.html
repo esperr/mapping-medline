@@ -109,6 +109,7 @@ $.get( "https://medviz-baselines.appspot.com/mapcounts", function( data ) {
 });
 
 var search = [];
+var pausetime = performance.now();
 var myMapsApiKey = 'AIzaSyCCGYq_RRoqyKK6PBQ1PUHqKA3VitSdvOI';
 google.charts.load('upcoming', {mapsApiKey: myMapsApiKey,'packages':['geochart']});
 
@@ -407,24 +408,41 @@ function getCatCounts(term, regionIndex, searchIndex, compare) {
 }
 
 function psearch(searchstr, callback) {
-  $.ajax({
-	url: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi',
-  error: function () {
-    startOver();
-    //alert("Oops, something went wrong. Please try again!")
-    return;
-  },
-	data: {
-	db: 'pubmed',
-	usehistory: 'y',
-	term: searchstr,
-	retmode: 'json',
-	retmax: 0,
-	email: 'ed_sperr@hotmail.com',
-	tool: 'medmap'
-  },
-  success: callback
-     });
+  checktime();
+
+  function checktime() {
+    var t1 = performance.now();
+    var timediff = t1 - pausetime;
+    if (timediff > 365) {
+      callutils();
+    } else {
+      setTimeout(checktime, 30);
+    }
+  }
+
+  function callutils() {
+    pausetime = performance.now();
+    console.log(pausetime)
+    $.ajax({
+  	url: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi',
+    error: function () {
+      startOver();
+      //alert("Oops, something went wrong. Please try again!")
+      return;
+    },
+  	data: {
+  	db: 'pubmed',
+  	usehistory: 'y',
+  	term: searchstr,
+  	retmode: 'json',
+  	retmax: 0,
+  	email: 'ed_sperr@hotmail.com',
+  	tool: 'medmap'
+    },
+    success: callback
+       });
+  }
+
 }
 
 
@@ -519,7 +537,7 @@ function drawMap(regindex, searchIndex) {
         console.log(countryitem.country + ": " + basecountries[i].country);
        comparison = countryitem.proportion - basecountries[i].proportion;
        tipText = "<strong>" + countryitem.count.toLocaleString() + "</strong> results &mdash; <span class='chartnote'>(" + Math.round10((countryitem.proportion*100), -2) + "% of search total)</br>" + countryitem.country + " represents " + Math.round10((basecountries[i].proportion*100), -2) + "% of all geotagged MEDLINE results</span>";
-       countryCompArray.push([countryitem.country, comparison, tipText]) 
+       countryCompArray.push([countryitem.country, comparison, tipText])
        //countryCompArray.push([countryitem.country, comparison, tipText]);
        //countryCompArray.push([countryitem.country, comparison]);
        });
