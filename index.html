@@ -413,7 +413,7 @@ function psearch(searchstr, callback) {
   function checktime() {
     var t1 = performance.now();
     var timediff = t1 - pausetime;
-    if (timediff > 365) {
+    if (timediff > 425) {
       callutils();
     } else {
       setTimeout(checktime, 30);
@@ -421,8 +421,9 @@ function psearch(searchstr, callback) {
   }
 
   function callutils() {
-    pausetime = performance.now();
-    console.log(pausetime)
+    calltime = performance.now();
+    console.log(calltime - pausetime);
+    pausetime = calltime;
     $.ajax({
   	url: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi',
     error: function () {
@@ -447,10 +448,6 @@ function psearch(searchstr, callback) {
 
 
 function displayCounts(regionIndex, searchIndex) {
-  console.log(JSON.stringify(searches[0]));
-  console.log(JSON.stringify(searches[0].regions[1].countries.length));
-  console.log(JSON.stringify(searches[1].regions[1].countries.length));
-
 
   if (regionIndex == "Regions") {
     $("#results").empty();
