@@ -157,7 +157,7 @@ var regions = { "regions":
 };
 
 function searchStringer (area) {
-  if (area == "Macedonia (Republic)") { searchString = '"Macedonia (Republic)"[mesh]' }
+  if (area == "Macedonia (Republic)") { searchString = '"Republic of North Macedonia"[mesh]' }
   else if (area == "Georgia (Republic)") { searchString = '"Georgia (Republic)"[mesh]' }
   else if (area == "Anguilla") { searchString = 'Anguilla AND Caribbean' }
   else if (area == "Turks and Caicos") { searchString = 'Turks and Caicos[tiab]' }
@@ -213,7 +213,9 @@ function showWait() {
 
   $( "#results" ).on( "click", ".regionsearch", function() {
       var region = $(this).data("region");
+      console.log(region);
       var searchIndex = $(this).data("searchIndex");
+      console.log(searchIndex);
       if (searches[searchIndex].regions[region].countries.length < 1) {
         getCatCounts(searches[searchIndex].term, region, searchIndex);
       } else {
@@ -385,6 +387,7 @@ function getCatCounts(term, regionIndex, searchIndex, compare) {
         }
         $("progress").attr("value", areaCounts.length/geo.length);
       } else {
+          console.log("Failure for: " + searchstr);
           startOver();
           return;
         }
@@ -422,7 +425,6 @@ function psearch(searchstr, callback) {
 
   function callutils() {
     calltime = performance.now();
-    console.log(calltime - pausetime);
     pausetime = calltime;
     $.ajax({
   	url: 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi',
