@@ -357,7 +357,6 @@ function getCatCounts(term, regionIndex, searchIndex, compare) {
     areapart = searchStringer(area);
     var searchstr = term + ' AND ' + areapart;
     psearch(searchstr, function(data) {
-      if (data.esearchresult.translationstack) {
         count = data.esearchresult.count;
         total = mySearch.count;
         proportion = count / total;
@@ -386,11 +385,6 @@ function getCatCounts(term, regionIndex, searchIndex, compare) {
           displayCounts(regionIndex, searchIndex);
         }
         $("progress").attr("value", areaCounts.length/geo.length);
-      } else {
-          console.log("Failure for: " + searchstr);
-          startOver();
-          return;
-        }
       });
 
 	    if (geoClone.length) {
@@ -416,7 +410,7 @@ function psearch(searchstr, callback) {
   function checktime() {
     var t1 = performance.now();
     var timediff = t1 - pausetime;
-    if (timediff > 400) {
+    if (timediff > 200) {
       callutils();
     } else {
       setTimeout(checktime, 30);
@@ -439,6 +433,7 @@ function psearch(searchstr, callback) {
     	retmode: 'json',
     	retmax: 0,
     	email: 'ed_sperr@hotmail.com',
+      api_key: 'f069cf776feaa627ab9b1e0fc2b090610708',
     	tool: 'medmap'
     },
     success: callback
